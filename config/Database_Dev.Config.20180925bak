@@ -1,0 +1,4 @@
+﻿<connectionStrings>
+	<!--Default Settings-->
+    <add name="Conn" connectionString="Server=101.226.179.224;database=sq_allmywords;UID=sq_allmywords;password=19870606wrz" providerName="System.Data.SqlClient" />
+</connectionStrings>

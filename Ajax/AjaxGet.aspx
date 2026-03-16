@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AjaxGet.aspx.cs" Inherits="Ajax_AjaxGet" %>

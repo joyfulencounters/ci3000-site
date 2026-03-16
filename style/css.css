@@ -1,0 +1,2082 @@
+﻿@charset "utf-8";
+/* CSS Document */
+@import url("global.css");
+body {margin:0;
+	background-color: #f8f8f8;}
+img{ border:0;}
+*{padding:0;margin:0;}
+body,td,th {font-family: 微软雅黑, Verdana; font-size: 12px; color: #636b75; line-height:18px;}
+#MainBox{width:960px; margin:auto; clear:both;}
+#MainBoxSearch{width:960px; margin:auto; clear:both; border:#ececec 1px solid;}
+.TopBox{ height:95px; margin-bottom:8px;}
+.logo{float:left; width:710px;}
+.logo img {
+    max-height: 80px;
+    width: auto;
+    margin-top: 8px;
+}
+.Logged{ width:240px; float:left;}
+.Loggedbg{ width:228px; background-image:url(../images/index/main_06.gif); height:34px; float:left;}
+.Loggedbg ul{ width:228px; background-image:url(../images/index/main_06.gif); height:34px; float:left;}
+.Loggedbg ul li{ float:left;}
+
+
+
+.Loggedimg{float:left;}
+
+/* 旧导航样式已覆盖
+.BoxNav{float:left; width:654px; padding-top:3px;}
+*+html .BoxNav{ padding-top:0px;}
+*html .BoxNav{ padding-top:12px;}
+.BoxNav span{ margin:35px; height:53px; line-height:53px;}
+*/
+.Boxleft{float:left; width:654px;  }
+.Boxleft span{ margin:0px; height:35px; line-height:0px;}
+.Boxright{float:right; width:294px;  margin-left:0px;}
+
+.Search{ margin-left:13px; margin-top:11px; float:left;}
+*+html .Search{ margin-left:8px;}
+*html .Search{ margin-left:4px;}
+.Searchbtten{margin-top:13px; float:left; margin-left:5px;}
+.SearchBox{width:182px; height:27px; background-image:url(../images/index/box.gif); background-repeat:no-repeat; line-height:27px; border:0px solid; padding-left:15px; color:#cccccc; padding-right:30px;}
+
+/* 导航 */
+.Nav{
+    background: #faf7f2;
+    width:960px;
+    height:53px;
+    margin-bottom:8px;
+    border-radius: 6px;
+    border: 1px solid #f0ede8;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.Nav .BoxNav{
+    flex: 1;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+.Nav .Boxright {
+    width: 300px;
+    height: 100%;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+}
+.nav-item {
+    margin: 0 30px 0 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.nav-link, .nav-random a,
+.nav-link:link, .nav-random a:link,
+.nav-link:visited, .nav-random a:visited,
+.nav-link:hover, .nav-random a:hover,
+.nav-link:active, .nav-random a:active {
+    color: #5c5750;
+    text-decoration: none !important;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: all 0.2s ease;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+    border-bottom: 2px solid transparent;
+    position: relative;
+}
+.nav-link:hover, .nav-random a:hover {
+    color: #458062;
+    border-bottom-color: #458062;
+}
+.nav-link.active {
+    color: #458062;
+    border-bottom-color: #458062;
+}
+/* 隐藏随机取词的图片，显示文字 */
+.nav-random img {
+    display: none !important;
+}
+.nav-random a::before {
+    content: "随机取词";
+    display: inline-block;
+}
+/* 搜索框区域样式 */
+.searchTool{
+    width: 280px;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    flex-wrap: nowrap;
+    gap: 0;
+}
+.searchTool .txtSearch{
+    padding: 0 10px;
+    vertical-align: middle;
+    flex: 1;
+    min-width: 140px;
+    height: 32px;
+    background: #fff;
+    border: 1px solid #e0ddd8;
+    border-right: 0;
+    line-height: 32px;
+    color:#797979;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+    font-size: 13px;
+    box-sizing: border-box;
+}
+.searchTool .txtSearch:focus {
+    border-color: #458062;
+}
+.searchTool .selSearch{
+    width:65px;
+    background:#fff;
+    height:32px;
+    line-height:32px;
+    border: 1px solid #e0ddd8;
+    border-left: 0;
+    margin:0;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+.searchTool .nowSearch{
+    float:left;
+    width:45px;
+    height:32px;
+    line-height:32px;
+    overflow:hidden;
+    padding-left:6px;
+    color: #5c5750;
+    font-size: 12px;
+}
+.searchTool .btnSel{
+    float:right;
+    width:18px;
+    height:32px;
+}
+.searchTool .btnSel a{
+    background:url(../images/index/sanjiao.gif) no-repeat center center;
+    display:block;
+    width:18px;
+    height:32px;
+}
+.searchTool .btnSearch{
+    margin-left: 0;
+    overflow:hidden;
+    height: 32px;
+    flex-shrink: 0;
+}
+.searchTool .btnSearch a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 32px;
+    background: #458062;
+    border-radius: 0 4px 4px 0;
+    text-decoration: none;
+    transition: background 0.2s ease;
+    color: #fff !important;
+    font-size: 14px;
+    font-weight: 500;
+}
+.searchTool .btnSearch a:hover {
+    background: #3a6d53;
+}
+.searchTool .selOption{
+    z-index:9999;
+    position:absolute;
+    margin-left:0;
+    width:63px;
+    background:#fff;
+    border:1px solid #e0ddd8;
+    border-top: 0;
+    margin-top: 32px;
+}
+.searchTool .selOption a{
+    display:block;
+    height:24px;
+    padding-left:6px;
+    line-height:24px;
+    color:#5c5750;
+    text-decoration:none;
+    font-size: 12px;
+}
+.searchTool .selOption a:hover{
+    color:#fff;
+    background:#458062;
+}
+
+/* 左边内容 */
+.ContentLeft{ width:654px; height: auto; margin-bottom: 20px; clear: both;}
+/* 清除浮动，确保内容撑开容器 */
+.ContentLeft::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.ContentLeftA{ width:654px;  overflow: visible;}
+.ContentLeftTitle{ width:654px; height:50px; line-height:50px; margin-top:8px;}
+.ContentLeft1{ width:654px; overflow: visible; margin-bottom:20px; margin-top:0;}
+.ContentLeft1 a,
+.ContentLeft1 a font {
+    color: #458062 !important;
+    text-decoration: none;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+.ContentLeft1 a:hover,
+.ContentLeft1 a:hover font {
+    background-color: #458062 !important;
+    color: #ffffff !important;
+}
+.ContentLeftTitle1{ width:654px; height:50px; line-height:50px; margin-top:8px;}
+.ContentText{ float:left;}
+.section-title {
+    font-size: 20px;
+    font-weight: 500;
+    color: #5c5750;
+    line-height: 50px;
+    padding-left: 8px;
+    letter-spacing: 2px;
+}
+.ContentMore{ float:right; margin-right:20px;}
+
+/* 优选词单卡片 - 固定高度，纵向flex布局 */
+.WordTxt{
+    width:196px;
+    height: 200px;
+    float:left;
+    margin:8px;
+    background: #faf7f2;
+    border-radius: 8px;
+    padding: 12px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    border: 1px solid #f0ede8;
+    display: flex;
+    flex-direction: column;
+}
+.WordTxt:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); transform: translateY(-2px); background: #f5f1ea;}
+*html .WordTxt{ margin:5px;}
+
+/* 卡片头部容器 - 横向三列flex布局，禁止换行 */
+.WordTxt1 {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    flex-shrink: 0;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed #e8e4df;
+}
+/* 移除原分隔线元素 */
+.WordTxt1 > .photosTxt:last-of-type {
+    display: none !important;
+}
+.WordTxt1 > .photosTxt:last-of-type img {
+    display: none !important;
+}
+.photosTxt img { display: none;}
+
+/* 头像 - 左侧第一列，固定64x64尺寸，禁止压缩，圆形裁切 */
+.Autographedphotos {
+    width: 64px;
+    height: 64px;
+    flex: 0 0 64px;
+    min-width: 64px;
+    min-height: 64px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.Autographedphotos a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.Autographedphotos img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 50%;
+}
+
+/* 中间区域 - 昵称+创建上下纵向排列，自适应宽度 */
+.WordTxt1 > .photosTxt:first-of-type {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 10px;
+    min-width: 0;
+}
+/* 昵称样式 */
+#MainBox .Boxleft .ContentLeft .WordTxt .WordTxt1 .photosTxt .Name {
+    font-size: 12px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+    line-height: 1.3;
+    color: #458062;
+}
+/* 创建文字样式 */
+.Name + span {
+    font-size: 11px;
+    color: #8b7d6b;
+    display: block;
+    margin: 2px 0 0 0;
+}
+
+/* 词单名称 - 右侧第三列，右对齐，固定宽度不挤压前两列 */
+.WordTxt1 > .photosTxt.Character1 {
+    flex-shrink: 0;
+    max-width: 75px;
+    padding-left: 8px;
+    box-sizing: border-box;
+    text-align: right;
+    line-height: 1.4;
+    font-size: 13px;
+    font-weight: 500;
+    color: #5c5750;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 词汇列表区域 - 占据剩余高度 */
+.SeparateWords{
+    width:100%;
+    flex: 1;
+    padding: 0;
+    line-height: 1.7;
+    color: #458062;
+    font-size: 13px;
+    overflow: hidden;
+}
+/* 词汇链接样式 */
+.WordTxt a {
+    color: #458062 !important;
+    text-decoration: none;
+    padding: 1px 3px;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+}
+.WordTxt a:hover {
+    background-color: #458062 !important;
+    color: #ffffff !important;
+    text-decoration: none;
+}
+
+.MessageList{ margin:3px; border-bottom:1px #d2dada dashed; margin-bottom:20px; overflow: hidden; }
+.MessageSignature{ float:left; width:54px; height:54px; background-image:url(../images/index/tou.gif);}
+.MessageListTxt1{ float:left; margin-left:10px; line-height:22px; width:562px; white-space:normal;}
+.MessageListTxt1 .Name,
+.MessageListTxt1 .Word{
+    display:inline;
+}
+/* 保留颜色体系 */
+.MessageListTxt1 .Name a{
+    color:#458062 !important;
+}
+.MessageListTxt1 .Word a{
+    color:#458062 !important;
+    padding: 2px 6px;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+}
+.MessageListTxt1 .Word a:hover {
+    background-color: #458062;
+    color: #ffffff !important;
+}
+.MessageListTxt{ float:left; margin-left:10px; line-height:22px; width:150px; height:70px;}
+.MessageListTxt ul{ list-style:none;}
+.MessageListTxt ul li{ }
+.Txtbtc{ width:100px; float:left; }
+
+/* 文字 */
+h1{ color:#797979; font-weight: 100; font-size:14px;}
+h2{ color:#c3c3c3; font-weight: 100; font-size:12px;}
+h3{ color:#000000; font-weight: 400; font-size:16px;}
+h4{ color:#000000; font-weight: 400; font-size:24px; line-height:30px;}
+.Word{ color:#0084ff; }
+.Blue{ color:#0084ff; font-size:18px;}
+.Name{color:#2f855a; font-weight:500; }
+.Green{color:#18d933; font-size:20px;}
+.Red{ color:#e74c3c; font-weight:600;}
+.Gray{ color:#999;}
+.Black{color:#000; font-size:14px;}
+.BlackWord{color:#000; font-size:24px;}
+.BlackWordList{color:#0084ff; font-size:16px;}
+.zao{ width:83px; height:16px;  float:right; margin-right:35px;}
+*+html .zao{margin-right:45px;}
+*html .zao{ margin-right:0px;}
+
+h1 a{ color:#797979; font-weight: 100; font-size:14px;}
+h2 a{ color:#c3c3c3; font-weight: 100; font-size:12px;}
+h3 a{ color:#000000; font-weight: 400; font-size:16px;}
+.Word a{ color:#0084ff; }
+.Blue a{ color:#0084ff; font-size:18px;}
+.Name a{color:#458062 !important; }
+.Green a{color:#18d933; font-size:20px;}
+.Red a{ color:#ff17a3;}
+.Gray a{ color:#a8a8a8;}
+.Black a{color:#000; font-size:14px;}
+.BlackWord a{color:#000; font-size:24px;}
+.BlackWordList a{color:#0084ff; font-size:16px;}
+
+
+h1 a:hover{ background-color:#797979; color:#fff; font-weight: 100; font-size:14px; text-decoration: none;}
+h2 a:hover{ background-color:#c3c3c3; color:#fff; font-weight: 100; font-size:12px; text-decoration: none;}
+h3 a:hover{ background-color:#000000; color:#fff; font-weight: 400; font-size:16px; text-decoration: none;}
+.Word a:hover{ background-color:#0084ff; color:#fff; text-decoration: none;}
+.Blue a:hover{  background-color:#0084ff; color:#fff; font-size:18px; text-decoration: none;}
+.Name a:hover{ background-color: #458062 !important; color: #fff !important; text-decoration: none !important;}
+.Green a:hover{background-color:#18d933; color:#fff; font-size:20px; text-decoration: none;}
+.Red a:hover{ background-color:#ff17a3; color:#fff; text-decoration: none;}
+.Gray a:hover{ background-color:#a8a8a8; color:#fff; text-decoration: none;}
+.Black a:hover{background-color:#000; color:#fff; font-size:14px; text-decoration: none;}
+.BlackWord a:hover{background-color:#000; color:#fff; font-size:24px; text-decoration: none;}
+.BlackWordList a:hover{background-color:#0084ff; color:#fff; font-size:16px; text-decoration: none;}
+
+
+
+/* 右边内容 */
+.buttonLogin{ width:169px; margin:auto;}
+.DataAmount{ background: #faf7f2; border-radius: 8px; border: 1px solid #f0ede8; height: 220px; padding: 15px; box-sizing: border-box;}
+.DataAmountBox{ width: 100%; height: auto; margin:0 auto;}
+.DataBox{ width: 100%; margin-top: 10px; }
+.data-list{ list-style:none; padding: 0 10px;}
+.data-list li{
+    height: 28px;
+    line-height: 28px;
+    color:#5c5750;
+    font-weight: normal;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px;
+    border-bottom: 1px dashed #e8e4df;
+}
+.data-list li:last-child {
+    border-bottom: none;
+}
+.data-label {
+    color: #8b7d6b;
+    font-weight: 500;
+}
+.data-value {
+    text-align: right;
+    color: #5c5750;
+}
+.data-value.Name {
+    color: #18d933;
+}
+.data-action-btn {
+    margin-top: 0;
+    text-align: center;
+    padding: 16px 0 16px 0;
+    border-top: 1px dashed #e8e4df;
+}
+.create-word-btn, .login-btn {
+    display: inline-block;
+    padding: 8px 20px;
+    background: #458062;
+    color: #ffffff !important;
+    border-radius: 20px;
+    text-decoration: none !important;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+.create-word-btn:hover, .login-btn:hover {
+    background: #3a6d53;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    text-decoration: none;
+}
+.buttonLogin {
+    display: none;
+}
+
+
+
+.Introduction{ background: #faf7f2; border-radius: 8px; border: 1px solid #f0ede8; width:294px; height: auto; margin-top:15px; padding: 15px; box-sizing: border-box;}
+.IntroductionText{ margin:0 auto; padding: 0 0 15px 0; text-align: center;}
+.Introduction div[style*="border-top: 1px dashed"] {
+    display: none !important;
+}
+/* 关于模块文字容器 */
+.intro-content {
+    max-width: 240px;
+    margin: 0 auto;
+    text-align: left;
+    line-height: 1.8;
+    font-size: 13px;
+    color: #5c5750;
+}
+.intro-content p {
+    margin-bottom: 12px;
+    text-align: left !important;
+    font-weight: normal !important;
+    font-size: 13px !important;
+}
+/* 隐藏原有滚动相关样式 */
+.Container,
+#Scroller-1,
+#Scrollbar-Container,
+a.hid {
+    display: none !important;
+}
+.section-header {
+    font-size: 18px;
+    font-weight: 500;
+    color: #5c5750;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #8b7d6b;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+.small-btn {
+    display: inline-block;
+    padding: 6px 18px;
+    background: #458062;
+    color: #ffffff !important;
+    border-radius: 15px;
+    text-decoration: none !important;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+.small-btn:hover {
+    background: #3a6d53;
+    transform: translateY(-1px);
+}
+.List{background: #faf7f2; border-radius: 8px; border: 1px solid #f0ede8; width:294px; height: auto; margin-top:15px; padding: 15px; box-sizing: border-box; overflow: hidden;}
+*html .List{padding:15px;width:264px;}
+*+html .List{padding:15px;}
+/* 热门词汇榜标题间距 */
+.List .section-header {
+    margin-bottom: 8px;
+}
+/* 热门词汇榜样式 */
+.Rank{
+    max-width: 240px;
+    margin: 6px auto 0 auto;
+    counter-reset: rank;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow:hidden;
+}
+.Rank ul{ list-style:none;}
+.Rank ul li{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 0;
+    line-height: 1.5;
+}
+/* 隐藏排名图片，用文本编号代替 */
+.Rank ul li img {
+    display: none !important;
+}
+/* 生成排名数字 */
+.Rank ul li::before {
+    content: counter(rank);
+    counter-increment: rank;
+    display: inline-block;
+    width: 20px;
+    text-align: center;
+    font-weight: 600;
+    color: #6b7f73;
+    margin-right: 6px;
+    flex-shrink: 0;
+}
+/* 词汇链接样式 */
+.Rank ul li a:first-of-type {
+    flex: 1;
+    margin: 0 8px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+/* 作者名称样式 */
+.Rank ul li .Name {
+    color: #4a8a68;
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+/* 新加入成员模块样式 */
+.list-members {
+    margin-top: 15px;
+}
+.NewsUsers1 {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px 0;
+    padding: 5px 0;
+    max-width: 240px;
+    margin: 0 auto;
+}
+.NewsUsers{
+    width: 22%;
+    text-align: center;
+    float: none;
+    margin: 0;
+}
+.NewsUsers img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 4px auto;
+    border-radius: 4px;
+}
+.NewsUsers a {
+    font-size: 12px;
+    text-decoration: none;
+    color: #5c5750;
+    display: block;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/* 版权 */
+.Bottom{ background-image:url(../images/member/member_31.gif); height:41px; float:left; width:948px;}
+.Bottom1{ width:6px; float:left;}
+.BottomText{ width:440px; float:left; height:41px; line-height:41px; padding-left:10px;}
+.BottomText1{ width:440px; float: right; height:41px; line-height:41px; text-align:right; padding-right:10px;}
+
+
+
+/* 单个词页面 */
+.SingleWord{ padding-top:20px; margin-left:30px; width:220px;}
+.WordBox{ width:654px; height: auto; min-height: 0;}
+.WordBoxA{ background:#f9f9f9; padding:20px; line-height:25px; font-size:14px;}
+.WordBoxF1{ text-align:right; padding:5px;}
+.MeaningWord{ height:300PX;}
+.MeaningWordA{ background:#f4fee7; height:90PX; line-height:90px; text-align:center; padding:20px; color:#000000; font-size:48px; font-weight:400; width:590px; margin:auto;}
+.MeaningWordB{
+    background:none !important;
+    background-color:transparent !important;
+    padding:0 !important;
+    margin:0 0 12px 15px !important;
+    font-size:13px;
+    color:#666;
+    line-height:24px;
+    overflow:hidden;
+}
+.MeaningWordB img{
+    display:none !important;
+}
+.MeaningWordB .meta-line{
+    display:block;
+    white-space:nowrap !important;
+    word-break:normal !important;
+    overflow-wrap:normal !important;
+}
+.MeaningWordB .Red,
+.MeaningWordB .Name,
+.MeaningWordB .Gray{
+    white-space:nowrap !important;
+    display:inline !important;
+}
+.MeaningWordB .Red{
+    color:#e85d75;
+    font-weight:600;
+}
+.MeaningWordB .Name a,
+.MeaningWordB .Name{
+    color:#2f7d57;
+    font-weight:500;
+    text-decoration:none;
+}
+.MeaningWordB .Gray{
+    color:#999;
+}
+.WordSectionTitle {
+    font-size: 28px;
+    font-weight: bold;
+    color: #3c5a4a;
+    line-height: 1.4;
+    margin: 12px 0 14px 20px;
+    font-family: "微软雅黑", "SimSun", serif;
+}
+.MeaningWordC{
+    text-align:left;
+    margin:6px 0;
+    padding:0;
+}
+.MeaningWordC span{ width:22px; height:22px; margin:10px;}
+.MeaningWordD{ padding:8px; margin-left:20px; cursor:hand;}
+.MeaningWordD1{ word-spacing:normal; display:inline; float:left; }
+.MeaningWordD1 div{ background-image:url(../images/word/word_14.gif); height:20px; float:left; }
+.MeaningWordD ul{ list-style:none; cursor:hand; }
+.MeaningWordD ul li{ width:23px; float:left; background-image:url(../images/word/word_14.gif); cursor:hand; }
+.MeaningWordE{ padding:3px 3px 4px 3px;  border-bottom:#dbdbdb 1PX solid; margin-left:23px; clear:both; height:40px; line-height:40px;}
+.Wordbttse1{ float:left; margin-top:15px; }
+*+html .Wordbttse1{ margin-top:0px;}
+.Wordbttse{ margin-left:0px; margin-top:10px; padding-left:10px;}
+.MeaningWordF{ padding:15px; height:40px; line-height:40px;  border-bottom:#dbdbdb 1PX solid;}
+.MeaningWordF1{height:80px; line-height:80px; float:right; }
+.MeaningWordG{ padding:15px; height:40px; line-height:40px; }
+.MeaningWordG1{margin-top:18px;}
+*html .MeaningWordG1{margin-top:13px;}
+*+html .MeaningWordG1{margin-top:13px;}
+.MeaningWordG1 { float:left; }
+.WordTags{ width:150px; background:#FFFFFF;}
+.WordTags ul{ list-style:none;  background-image:url(../images/word/word_14.gif);}
+.WordTags ul li{ float:left;}
+
+
+
+
+
+/* 加入词单弹框 */
+.Popword {width:100px; margin:2px; padding:5px; float:left;}
+a.bits {color:#000; text-decoration:none; outline-style:none; position:relative; z-index:500;}
+a.bits em {display:none;}
+a.bits:active, a.bits:focus {background:#fff;}
+a.bits:active span, a.bits:focus span {display:none;}
+a.bits:active em, a.bits:focus em {display:block; color:#000; width:389px; font-style:normal; cursor:default; padding:5px 5px 5px 5px; position:absolute; left:-5px; top:-5px;  }
+.bitsword { background-image:url(../images/word/word_s_02.gif); padding:20px; width:349px;}
+.bitswordA { width:95%; border-bottom:#e8e8e8 1px solid; padding:0px 0px 10px 0px;}
+.bitswordA ul { list-style: none; line-height:22px;}
+.bitswordA ul li { width:160px; float:left;   -o-text-overflow:ellipsis; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;}
+.bitswordB { width:369px; padding:10px 0px 0px 0px;}
+
+
+
+/* 旧搜索框样式已覆盖 */
+.clear{clear:both;height:0px;overflow:hidden;}
+button,.btnNormal{height:22px;line-height:18px;padding:0 9px!important;padding:0 5px;}
+
+.searchTool .searchExtend{float:left;line-height:24px;_padding-top:5px;}
+
+.searchTool .radio{vertical-align:middle;margin-left:10px;margin-right:2px;*margin-right:0;}
+
+*html .searchTool .btnSel{margin-top:-20px;}
+
+.searchTool .btnSel a:hover{background:url(../images/index/sanjiao.gif) no-repeat center center;border:1px solid #fff;width:12px;height:20px;}
+
+.selOption ul{list-style-type:none; list-style-position:outside;}
+.searchTool .selOption a{display:block;height:21px;padding-left:5px;line-height:21px;color:#000;text-decoration:none;}
+
+.searchTool .selOption a:hover{color:#fff;background:#2a9cdf;}
+
+.searchTool .btnSearch .lbl{cursor:pointer;display:block;width:40px;padding-left:5px;letter-spacing:5px;text-align:center;height:18px;padding-top:1px;margin:0 auto;filter:progid:DXImageTransform.Microsoft.DropShadow(color=#daeefa,offX=1,offY=1,positives=true);}
+
+.searchTool .btnSearch a:hover .lbl{padding-top:0px;}
+
+
+/* 创建新词单 */
+.CreateWord{ background-image:url(../images/word/word_bg_05.gif); background-repeat:no-repeat; width:900px; overflow:hidden; padding:20px 30px; margin:auto;}
+.CreateWord1{ background-image:url(../images/word/word_bg_05.gif); background-repeat:no-repeat; width:900px; height:250PX;; padding:20px 30px; margin:auto;}
+.CreateWordA{ border-bottom:#eaeaea 1px solid; height:40px; line-height:40px;}
+.CreateWordA1{ border-bottom:#eaeaea 1px dashed; height:150px; line-height:40px; margin-bottom:20px;}
+.CreateWordB{ padding:30px;}
+.CreateWordB1{ padding:0px 30px 0px 30px;}
+.CreateWordC{ width:80px; float:left; height:25px; line-height:25px;}
+.CreateWordC1{ width:150px; float:left; height:25px; line-height:25px;}
+.CreateWordD{ width:615PX; text-align:right; padding:10px;}
+.CreateWordD1{ width:615PX; text-align:left; padding:30px;}
+.CreateBtten{ width:500px; height:25px; line-height:25px; padding-left:10px; font-size:14px; color:#7f7f7f;}
+.CreateBtten1{ width:500px; height:155px; padding-left:10px; padding-top:5px; font-size:14px; color:#7f7f7f;}
+
+.CreateWord1A{ height:50px; line-height:50px;}
+
+
+/* 404 */
+.Mistake404{ background-image:url(../images/404/404_11.gif); width:746px; height:41px; line-height:41px; float:left; margin-top:10px;}
+.Mistake40{ float:left; margin-top:10px;}
+
+
+
+/* 忘记密码 */
+.ForgotPassword{padding:50px 10px 10px 10px;}
+.ForgotPasswordA{ float:left;}
+.ForgotPasswordB{ float:left; padding:5PX;}
+
+/* 单个词单页面-列表方式 */
+.CreateWordlist{ padding-top:50px; margin-left:30px; width:220px;}
+.CreateWordlist1{ width:294px; background-image:url(../images/word/words_09.gif); background-repeat:no-repeat; height:165px; }
+.PersonalWordlist{ background-image:url(../images/word/words_07.gif); background-repeat:no-repeat; width:654px; height:208px;}
+.PersonalWordlistLeft{ float:left; width:127px; padding:30px 0px 30px 30px;}
+.PersonalWordlistLeftA{ width:99px;clear:both; text-align:center; height:40px; line-height:40px;}
+.PersonalWordlistRight{ float:left; padding:33px 0px 33px 5px; height:130px; width:487px; }
+.WordlistRightA{ width:100%; margin-top:10px;}
+.WordlistRightA1{ margin-top:2px; margin-right:2px;}
+.WordlistRightA ul li span{ padding-top:20px;}
+.WordlistRightA ul{  }
+.WordlistRightA ul li{ float:left; margin-right:3px; }
+*+html .WordlistRightA ul li{ float:left; margin-right:3px; }
+*html .WordlistRightA ul li{ float:left; margin-right:3px; }
+.WordlistRightA ul li div{ float:left;}
+.WordlistRightA ul li a{ padding:5px; background:#FFFFFF; border:#c7c7c7 1px solid; width:105px; float:left; color:#000; text-decoration:none;  cursor:hand;}
+.WordlistRightA ul li a:hover{ padding:5px; background:#ebfcef; border:#c3e6af 1px solid; width:105px; float:left; }
+.WordlistRightB{ clear:both; margin:110px 0px 0px 10px; }
+*+html .WordlistRightB{ clear:both; margin:80px 0px 0px 10px; }
+*html .WordlistRightB{ clear:both; margin:80px 0px 0px 10px; }
+
+.CreateWordlistA{ height:150%; padding:10px;}
+.CreateWordlistA1{ padding:0px;}
+.CreateWordlistA div{ margin-top:15px;}
+.CreateWordlistB{ border-bottom:1px #d2dada dashed; height:30px; padding-bottom:10px;}
+.CreateWordlistB1{ text-align:right; width:380px; float:left;}
+.CreateWordlistB2{ width:250px; float:left; }
+.CreateWordlistC{  border-bottom:1px #d2dada dashed; padding-bottom:20px; overflow:hidden;}
+.CreateWordlistD{ clear:both;}
+.CreateWordlistD1{ clear:both; height:30px; line-height:30px; margin-left:10px;}
+.CreateWordlistD2{ clear:both; height:30px; line-height:30px;}
+.CreateWordlistD ul li{ width:162px; float:left; line-height:40px;}
+.CreateWordlistE{ padding:3px 3px 25px 3px; clear:both; height:40px; line-height:40px;}
+.CreateWordlistF{ padding:7px 0px 0px 10px; float:left}
+*+html .CreateWordlistF{ padding:2px 0px 0px 10px;}
+*html .CreateWordlistF{ padding:0px 0px 0px 10px;}
+.CreateWordlistG{ float:left}
+
+.TagCloudone{ border:#ececec 1px solid; padding:25px; text-align:center; overflow: hidden;}
+.TagCloudone ul{ }
+.TagCloudone ul li{ float:left; width:185px; text-align:left; line-height:30px;}
+.CreateWordlist2{ border:#d4d8d0 1px solid; background:#FFFFFF; padding:10px; width:230px; text-align:center;}
+.CreateWordlist3{ margin-left:20px; margin-top:13px; }
+.CreateWordlist4{ padding:10px 0px;}
+.CommentsText{ background:#f3f3f3; padding:10px; }
+.CommentsBg{ background:#f3f3f3; padding:25px; font-size:14px;}
+.CommentsBg1{ height:30px; clear:both; }
+.CommentsBgAll{ clear:both; margin-top:50px;}
+.CommentsBgAllA{ clear:both; margin-top:30px;}
+.CommentsBgAllB{ clear:both; margin-top:30px;}
+
+.ViewALLWord{ height:40px; line-height:40px; }
+.ViewALLWordA{ padding:15px;}
+.ViewALLWordB{ border-bottom:1px #d2dada dashed; height:30px; text-align:right;}
+
+
+
+
+
+/*所有词单两种切换*/
+#con { margin-top:0px; clear:both;   }
+#tags {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px 0px 0px 10px;  PADDING-TOP: 0px; HEIGHT: 28px
+}
+#tags LI { background:#fff;
+	BACKGROUND: url(../images/word/tagleft.gif) no-repeat left bottom; FLOAT: left;  LIST-STYLE-TYPE: none; HEIGHT: 28px
+}
+#tags LI A {background:#fff;
+	PADDING-RIGHT: 10px; PADDING-LEFT: 10px; BACKGROUND: url(../images/word/tagright.gif) no-repeat right bottom; FLOAT: left;  COLOR: #0084ff; LINE-HEIGHT: 28px;  HEIGHT: 28px; TEXT-DECORATION: none
+}
+#tags LI.emptyTag {
+	BACKGROUND: none transparent scroll repeat 0% 0%; WIDTH: 4px
+}
+#tags LI.selectTag {
+	BACKGROUND-POSITION: left top; MARGIN-BOTTOM: -2px; POSITION: relative; HEIGHT: 28px
+}
+#tags LI.selectTag A {
+	BACKGROUND-POSITION: right top; COLOR: #000; LINE-HEIGHT: 28px; HEIGHT: 28px; font-weight:800;
+}
+
+#tagContent { 
+	 PADDING-RIGHT: 1px;  PADDING-LEFT: 1px; PADDING-BOTTOM: 1px;  PADDING-TOP: 1px; 
+}
+.tagContent {
+	PADDING-RIGHT: 10px; DISPLAY: none; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; COLOR: #474747; PADDING-TOP: 10px; 
+}
+#tagContent DIV.selectTag {
+	DISPLAY: block
+}
+
+
+
+
+
+
+
+
+/*分页标签*/
+DIV.yellow {
+	PADDING-RIGHT: 7px; PADDING-LEFT: 7px; PADDING-BOTTOM: 7px; MARGIN: 3px; PADDING-TOP: 7px; TEXT-ALIGN: right; margin-top:35px;}
+DIV.yellow A {
+	BORDER-RIGHT: #ccc 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #ccc 1px solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 2px; MARGIN: 2px; BORDER-LEFT: #ccc 1px solid; COLOR: #000; PADDING-TOP: 2px; BORDER-BOTTOM: #ccc 1px solid; TEXT-DECORATION: none
+}
+DIV.yellow A:hover {
+	BORDER-RIGHT: #42c4ec 1px solid; BORDER-TOP: #42c4ec 1px solid; BORDER-LEFT: #42c4ec 1px solid; COLOR: #000; BORDER-BOTTOM: #42c4ec 1px solid
+}
+DIV.yellow A:active {
+	BORDER-RIGHT: #f0f0f0 1px solid; BORDER-TOP: #f0f0f0 1px solid; BORDER-LEFT: #f0f0f0 1px solid; COLOR: #000; BORDER-BOTTOM: #f0f0f0 1px solid
+}
+DIV.yellow SPAN  {
+	BORDER-RIGHT: #ccc 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #ccc 1px solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 2px; MARGIN: 2px; BORDER-LEFT: #ccc 1px solid; COLOR: #0084ff; PADDING-TOP: 2px; BORDER-BOTTOM: #ccc 1px solid; TEXT-DECORATION: none
+}
+
+DIV.yellow SPAN.current {
+	BORDER-RIGHT: #42c4ec 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #42c4ec 1px solid; PADDING-LEFT: 5px; FONT-WEIGHT: bold; PADDING-BOTTOM: 2px; MARGIN: 2px; BORDER-LEFT: #42c4ec 1px solid; COLOR: #fff; PADDING-TOP: 2px; BORDER-BOTTOM: #42c4ec 1px solid; BACKGROUND-COLOR: #42c4ec
+}
+DIV.yellow SPAN.disabled {
+	BORDER-RIGHT: #eee 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #eee 1px solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 2px; MARGIN: 2px; BORDER-LEFT: #eee 1px solid; COLOR: #ddd; PADDING-TOP: 2px; BORDER-BOTTOM: #eee 1px solid
+}
+
+
+
+
+/*更多搜索*/
+.SearchBoxMore{ width:333px; padding:20px 0px 0px 40px; height:30px; background-image:url(../images/search/search_16.png); font-size:14px; background-repeat:no-repeat; border:0px}
+.SearchBoxMore1{ float:left; width:373px;}
+.SearchBoxMore2{ float:left; width:100px;}
+.DetailsSearchBox{ background-image:url(../images/search/Search_05.gif); width:960px; height:304px; margin:0 auto;}
+
+.SearchBoxWord{ width:960px; margin:0 auto; margin-bottom:10px;}
+.SearchBoxWordA{ width:940px; background-image:url(../images/search/search_015.gif); height:69px; float:left;} 
+.SearchBoxWordA1{ margin-left:160px; height:36px; width:400px; float:left; padding:16px;} 
+*+html .SearchBoxWordA1{ margin-left:90px;} 
++html .SearchBoxWordA1{ margin-left:90px;} 
+.SearchBoxWordA2{ height:16px; width:400px;  padding:10px; font-size:14px;} 
+.SearchBoxWordA4{ height:36px; width:100px; float:left; padding:16px; line-height:36px;} 
+.SearchBoxWordA3{ height:36px; width:82px; float:left; padding:16px; line-height:36px;} 
+*+html .SearchBoxWordA3{ margin-left:90px;} 
+*html .SearchBoxWordA3{ margin-left:90px;} 
+.SearchBoxWordB{ float:left;} 
+.SearchBoxWordC{ margin:30px;} 
+.SearchBoxWordD{ background:#fafafa; height:50px; line-height:50px; padding:20px;} 
+.SearchBoxWordE{ height:80px; padding:20px; border-bottom:1px #d2dada dashed; } 
+.SearchBoxWordE1{ height:40px; line-height:40px; margin:15px; } 
+.SearchBoxWordF{ height:80px; padding:20px; border-bottom:1px #d2dada dashed; background:#fafafa;} 
+
+.NoResults{ float:left; margin-left:35px; margin-top:30px;}
+
+.TabbedPanels { margin-left:240px; margin-top:100px; float: left;clear: none;width: 485px; }
+*+html .TabbedPanels { margin-left:240px; }
+*html .TabbedPanels { margin-left:120px;  }
+.TabbedPanelsTabGroup {margin: 0px;padding: 0px;}
+
+
+.TabbedPanelsTab { width:50px; text-align:center; 
+	position: relative;
+	top: 1px;
+	float: left;
+	padding: 4px 10px;
+	margin: 0px 1px 0px 0px;
+	font-size:14px;
+	list-style: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	cursor: pointer;
+}
+
+
+.TabbedPanelsTabHover { text-decoration:underline; 
+}
+
+
+.TabbedPanelsTabSelected {
+	color:#0084ff; font-weight:bold; width:50px; height:10px; line-height:10px; background-image:url(../images/search/search_15.gif); text-align:center; text-decoration:underline; margin-top:3px; 
+
+}
+
+
+.TabbedPanelsTab a {
+	color: black;
+	text-decoration: none;
+}
+
+
+.TabbedPanelsContentGroup {
+	clear: both; margin-left:-5px;
+
+}
+
+
+.TabbedPanelsContent {
+	padding: 4px;
+}
+
+
+.TabbedPanelsContentVisible {
+}
+
+
+
+
+.VTabbedPanels .TabbedPanelsTabGroup {
+	float: left;
+	width: 10em;
+	height: 20em;
+	color:#0084ff
+	position: relative;
+}
+
+
+.VTabbedPanels .TabbedPanelsTab {
+	float: none;
+	margin: 0px;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+}
+
+
+.VTabbedPanels .TabbedPanelsTabSelected {
+	background-color: #EEE;
+	border-bottom: solid 1px #999;
+}
+
+
+.VTabbedPanels .TabbedPanelsContentGroup {
+	clear: none;
+	float: left;
+	padding: 0px;
+	width: 30em;
+	height: 20em;
+}
+
+
+
+
+
+
+
+
+
+.tagCloud{ 
+ width:266px; 
+ text-align:left; 
+ margin:30px auto; 
+} 
+.tagCloud a{ 
+ text-decoration:none; 
+ padding:3px; 
+} 
+.tagCloud a:hover{ 
+ background:#69f; 
+ color:#fff; 
+} 
+.color0{ 
+ color:#2F5FC2; 
+} 
+.color1{ 
+ color:#AC1BF2; 
+} 
+.color2{ 
+ color:#9E6FC5; 
+} 
+.color3{ 
+ color:#FBA426; 
+} 
+.color4{ 
+ color:#2739CF; 
+} 
+.color5{ 
+ color:#C8A453; 
+} 
+.color6{ 
+ color:#AB2846; 
+} 
+.weight0{ 
+ font-weight:100; 
+} 
+.weight1{ 
+ font-weight:300; 
+} 
+.weight2{ 
+ font-weight:500; 
+} 
+.weight3{ 
+ font-weight:700; 
+} 
+.weight4{ 
+ font-weight:900; 
+} 
+.weight5{ 
+ font-weight:bold; 
+} 
+.weight6{ 
+ font-weight:bolder; 
+} 
+.size0{ 
+ font-size:12px; 
+} 
+.size1{ 
+ font-size:14px; 
+} 
+.size2{ 
+ font-size:16px; 
+} 
+.size3{ 
+ font-size:18px; 
+} 
+.size4{ 
+ font-size:20px; 
+} 
+.size5{ 
+ font-size:22px; 
+} 
+.size6{ 
+ font-size:24px; 
+} 
+
+
+.Character{width:60px; text-overflow:clip; white-space:nowrap; overflow:hidden; text-align:center; line-height:25px;}
+.Character1{width:95px; text-overflow:clip; white-space:nowrap; overflow:hidden; line-height:25px;}
+
+
+
+
+
+/*文本域*/
+
+.TextFields{ padding:10px 10px; color:#636b75; background: url(../images/word/bg_logo.gif) no-repeat; background-position:center; width:625px; height:130px; border:#d1d1d1 1px solid;}
+
+
+
+#showflickrImg{width:294px; background-image:url(../images/index/index_bg1.gif); background-repeat:no-repeat; height:285px; margin-top:10px; padding:20px 25px; }
+
+
+
+
+
+
+.cycyt{ CURSOR: hand; zoom:1;}
+
+/* 修复标签输入区域垂直对齐 */
+.MeaningWordE {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 6px 0 6px 0;
+    clear: both;
+}
+
+.Wordbttse1,
+.Wordbttse {
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.Wordbttse1 input {
+    width: 250px;
+    height: 28px;
+    padding: 0 10px;
+    border: 1px solid #d7ddd7;
+    border-radius: 14px;
+    background: #fbfcfa;
+    color: #666;
+    font-size: 13px;
+    line-height: 28px;
+    outline: none;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+
+.TagSubmitBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    padding: 0 12px;
+    border: 1px solid #8db79f;
+    border-radius: 14px;
+    background: #f5faf6;
+    color: #4d8b68;
+    font-size: 13px;
+    text-decoration: none;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.TagSubmitBtn,
+.TagSubmitBtn:hover,
+.TagSubmitBtn:focus,
+.TagSubmitBtn:active {
+    text-decoration: none;
+}
+
+.TagSubmitBtn:hover {
+    background: #eaf5ee;
+    border-color: #6ea684;
+    color: #3f7d5c;
+}
+
+/* MeaningWordG 最终版按钮样式 */
+.MeaningWordG {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 14px 0 18px 0;
+    clear: both;
+}
+
+.MeaningWordG p {
+    margin: 0;
+    padding: 0;
+}
+
+.WordActionBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    padding: 0 14px;
+    border-radius: 15px;
+    border: 1px solid #d7ddd7;
+    background: #fbfcfa;
+    color: #5e6b61;
+    font-size: 13px;
+    line-height: 1;
+    text-decoration: none !important;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.WordActionBtn:hover,
+.WordActionBtn:focus,
+.WordActionBtn:active {
+    text-decoration: none !important;
+}
+
+/* 加入词单按钮 */
+.AddToListBtn {
+    border-color: #9abfa7;
+    background: #f4faf6;
+    color: #4d8b68;
+}
+
+.AddToListBtn:hover {
+    background: #eaf5ee;
+    border-color: #6ea684;
+    color: #3f7d5c;
+}
+
+.AddToListBtn .BtnText::before {
+    content: "＋ ";
+    font-weight: bold;
+}
+
+/* 收藏按钮基础样式 */
+.CollectionBtn {
+    position: relative;
+    overflow: hidden;
+    min-width: 78px;
+    border-color: #d9d9d9;
+    background: #fafafa;
+    color: #666;
+}
+
+/* 隐藏 HyperLink 输出的原始图片，但保留其存在以便根据 ImageUrl 判断状态 */
+.CollectionBtn img {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* 默认：未收藏（2.gif） */
+.CollectionBtn::before {
+    content: "♡ 收藏";
+    display: inline-block;
+}
+
+/* 已收藏（3.gif） */
+.CollectionBtn:has(img[src*="3.gif"]) {
+    border-color: #9ccbb3;
+    background: #f3faf6;
+    color: #3f8f6b;
+}
+
+.CollectionBtn:has(img[src*="3.gif"])::before {
+    content: "♥ 已收藏";
+}
+
+/* 未收藏 hover */
+.CollectionBtn:hover {
+    background: #f5f5f5;
+    border-color: #c9c9c9;
+    color: #555;
+}
+
+/* 已收藏 hover */
+.CollectionBtn:has(img[src*="3.gif"]):hover {
+    background: #eaf5ee;
+    border-color: #6ea684;
+    color: #3f7d5c;
+}
+
+/* 修复MeaningWordG按钮对齐问题 */
+.MeaningWordG {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px;
+    margin: 2px 0 4px 0;
+    clear: both;
+}
+
+.MeaningWordG .Popword,
+.MeaningWordG .MeaningWordG1 {
+    float: none !important;
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.MeaningWordG .Popword p {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+}
+
+.MeaningWordG .Popword > br,
+.MeaningWordG .Popword > span,
+.MeaningWordG .Popword > img {
+    display: none !important;
+}
+
+.MeaningWordG .WordActionBtn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    vertical-align: middle !important;
+    height: 30px;
+    padding: 0 14px;
+    box-sizing: border-box;
+    margin: 0 !important;
+}
+
+.MeaningWordG .CollectionBtn {
+    margin: 0 !important;
+}
+
+.MeaningWordG .AddToListBtn {
+    margin: 0 !important;
+}
+
+/* 修复按钮文字被全局样式污染导致的错位 */
+.MeaningWordG .BtnText {
+    display: inline !important;
+    height: auto !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* 强制按钮内部文字居中 */
+.MeaningWordG .AddToListBtn,
+.MeaningWordG .CollectionBtn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* 标签输入区域优化 */
+.MeaningWordE {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0 14px 0;
+    clear: both;
+}
+
+.Wordbttse1 {
+    margin-right: 0 !important;
+    display: flex;
+    align-items: center;
+}
+
+.Wordbttse1 input {
+    width: 250px;
+    height: 28px;
+    padding: 0 10px;
+    border: 1px solid #d7ddd7;
+    border-radius: 14px;
+    background: #fbfcfa;
+    color: #666;
+    font-size: 13px;
+    line-height: 28px;
+    outline: none;
+    box-shadow: none;
+    vertical-align: middle;
+    margin: 0;
+}
+
+.Wordbttse1 input:focus {
+    border-color: #8db79f;
+    background: #fff;
+}
+
+.Wordbttse {
+    display: flex;
+    align-items: center;
+}
+
+.TagSubmitBtn {
+    display: inline-block;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 10px;
+    border: 1px solid #8db79f;
+    border-radius: 14px;
+    background: #f5faf6;
+    color: #4d8b68;
+    font-size: 13px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.TagSubmitBtn,
+.TagSubmitBtn:hover,
+.TagSubmitBtn:focus,
+.TagSubmitBtn:active {
+    text-decoration: none;
+}
+
+.TagSubmitBtn:hover {
+    background: #eaf5ee;
+    border-color: #6ea684;
+    color: #3f7d5c;
+}
+
+/* 共鸣签标签样式优化 - 统一使用新结构 */
+/* 清除旧结构残留样式影响 */
+.MeaningWordD1,
+.MeaningWordD1 div,
+.cycyt {
+    all: unset !important;
+    display: none !important;
+}
+
+.MeaningWordD {
+    padding-top: 10px;
+    line-height: normal;
+    font-size: 0;
+    clear: both;
+}
+
+.MeaningWordTag {
+    display: inline-block !important;
+    margin: 0 10px 10px 0 !important;
+    padding: 6px 12px !important;
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+    color: #666 !important;
+    text-decoration: none !important;
+    background: transparent !important;
+    border: 1px solid #d8d8d8 !important;
+    border-radius: 14px !important;
+    vertical-align: top !important;
+    white-space: nowrap !important;
+    float: none !important;
+}
+
+.MeaningWordTag:hover,
+.MeaningWordTag:focus,
+.MeaningWordTag:active {
+    color: #3f8f6b !important;
+    border-color: #9ccbb3 !important;
+    background: #f7fbf9 !important;
+    text-decoration: none !important;
+}
+
+.SimilarWordHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 4px 0 12px 0;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #f0f5f0;
+}
+
+.SimilarWordTitle {
+    font-size: 16px;
+    font-weight: 500;
+    color: #228a30;
+    line-height: 1.4;
+    padding-left: 8px;
+    border-left: 3px solid #7fcf72;
+}
+
+.SimilarMoreBtn {
+    display: inline-block;
+    padding: 2px 10px;
+    border: 1px solid #d8ded8;
+    border-radius: 14px;
+    background: #fbfcfa;
+    color: #666;
+    font-size: 12px;
+    line-height: 20px;
+    text-decoration: none;
+}
+
+.SimilarMoreBtn:hover,
+.SimilarMoreBtn:focus,
+.SimilarMoreBtn:active {
+    text-decoration: none;
+    color: #4d8b68;
+    border-color: #9ccbb3;
+    background: #f4faf6;
+}
+
+.WordRemarkHeader {
+    margin: 0 0 15px 0;
+    padding-bottom: 8px;
+}
+
+.CommentHeader{
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    margin:6px 0 6px 0;
+}
+
+.CommentHelpBtn{
+    display:inline-block;
+    font-size:12px;
+    color:#4e8f6c;
+    border:1px solid #cfded3;
+    border-radius:14px;
+    padding:3px 10px;
+    background:#fff;
+    text-decoration:none;
+    cursor:pointer;
+    line-height:1.4;
+}
+
+.CommentHelpBtn:hover,
+.CommentHelpBtn:focus,
+.CommentHelpBtn:active{
+    text-decoration:none;
+    background:#f5faf7;
+    color:#3f7f5c;
+}
+
+/* --- 评论区优化（专属类名隔离，不影响其他模块）--- */
+/* 1. 只隐藏标题图片部分，不隐藏整个标题栏 */
+.commentSection .ContentLeftTitle1 .ContentText {
+    display: none !important;
+}
+
+/* 评论区整体布局优化 */
+.commentSection {
+    position: relative;
+    padding-top: 0;
+}
+.commentSection .WordBoxF {
+    position: static;
+}
+
+/* 右上角“怎么造句？”（输入框外部） */
+.commentSection .WordBoxF .zao{
+    display: block;
+    width: 100%;
+    text-align: right;
+    margin: 0 0 14px 0;
+    padding: 0;
+    line-height: 1;
+}
+
+.commentSection .WordBoxF .zao #contentPad{
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+.commentSection .WordBoxF .zao .formInfo{
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.commentSection .WordBoxF .zao a{
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    line-height: 1.2;
+    vertical-align: top;
+}
+
+.commentSection .WordBoxF > div:nth-child(2){
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.commentSection .WordBoxF .TextFields{
+    display: block;
+    width: 100% !important;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+/* 隐藏原来的图片按钮 */
+.commentSection .WordBoxF .zao img {
+    display: none;
+}
+
+/* “怎么造句？”样式 */
+.commentSection .WordBoxF .zao a.jTip {
+    display: inline-block;
+    font-size: 14px;
+    color: #4e8f6c;
+    text-decoration: underline;
+    cursor: help;
+    white-space: nowrap;   /* 关键：禁止自动换行 */
+}
+.commentSection .WordBoxF .zao a.jTip::before {
+    content: "怎么造句？";
+}
+
+.commentSection .WordBoxF .zao a.jTip:hover {
+    color: #3f7f5c;
+    text-decoration: none;
+}
+
+/* 评论输入框样式优化 */
+.commentSection .WordBoxF .TextFields {
+    background: #fff;
+    padding: 12px 70px 12px 12px;
+
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+
+    font-size: 14px;
+    line-height: 1.6;
+
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* 输入框 focus 状态 */
+.commentSection .WordBoxF .TextFields:focus {
+    border-color: #4e8f6c;
+    box-shadow: 0 0 0 2px rgba(78,143,108,0.08);
+    outline: none;
+}
+
+/* ----- 评论输入框和提交按钮对齐修复 ----- */
+.commentSection .WordBoxF > div:first-child{
+    width: 100%;
+}
+
+.commentSection .WordBoxF .TextFields{
+    display: block;
+    width: 100% !important;
+    box-sizing: border-box;
+}
+
+.commentSection .WordBoxF1{
+    width: 100%;
+    text-align: right;
+    margin-top: 10px;
+}
+
+.commentSection .WordBoxF1 .CommentSubmitBtn{
+    display: inline-block;
+}
+
+.CommentSubmitBtn{
+    background: #4e8f6c;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    height: 36px;
+    padding: 0 22px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.CommentSubmitBtn:hover{
+    background: #3f7d5c;
+}
+
+/* ----- word.aspx 右侧模块高度自适应修复 ----- */
+/* 去掉固定高度，清除浮动让容器被内容自然撑开 */
+.wordPage .DataAmount,
+.Boxright .DataAmount {
+    height: auto !important;
+    overflow: hidden;
+}
+
+/* 清除浮动，确保父容器高度正确撑开 */
+.DataAmount:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+/* 确保嵌套的Boxright也正确清除浮动 */
+.Boxright .Boxright {
+    float: none !important;
+    clear: both;
+}
+
+/* ----- word.aspx 右侧所属词单模块优化 ----- */
+.Boxright {
+    width: 300px;
+}
+
+.DataAmount {
+    background: #f7f5f2;
+    border-radius: 8px;
+    padding: 20px 18px;
+    height: auto;
+    box-sizing: border-box;
+}
+
+.WordListTitle {
+    font-size: 16px;
+    font-weight: 500;
+    color: #228a30;
+    line-height: 1.4;
+    padding-left: 8px;
+    border-left: 3px solid #7fcf72;
+    margin-bottom: 18px;
+}
+
+.DataAmount .SingleWord {
+    padding-top: 0;
+    margin-bottom: 10px;
+    margin-left: 0;
+    width: auto;
+}
+
+.DataAmount .MessageList {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 0 18px;
+    border-bottom: 1px dashed #e5e5e5;
+    margin: 0;
+    overflow: visible;
+    transition: background 0.2s;
+}
+
+.DataAmount .MessageList:last-child {
+    border-bottom: none;
+}
+
+.DataAmount .MessageSignature {
+    float: none;
+    width: auto;
+    height: auto;
+    background-image: none;
+    padding: 0;
+}
+
+.DataAmount .MessageSignature img {
+    width: 48px;
+    height: 48px;
+    border-radius: 4px;
+    object-fit: cover;
+    display: block;
+}
+
+.DataAmount .MessageListTxt {
+    float: none;
+    margin-left: 0;
+    width: auto;
+    height: auto;
+    line-height: 1.5;
+}
+
+.DataAmount .MessageListTxt ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.DataAmount .MessageListTxt li {
+    margin: 2px 0;
+    height: auto !important;
+    line-height: 1.5 !important;
+}
+
+.DataAmount .MessageListTxt .Name a {
+    color: #3c6e5a;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.DataAmount .MessageListTxt .Name a:hover {
+    text-decoration: underline;
+}
+
+.DataAmount .MessageListTxt .Word {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.DataAmount .MessageListTxt .Word img {
+    vertical-align: middle;
+}
+
+/* 词单名称链接本身hover效果 */
+.DataAmount .MessageListTxt .Word a {
+    color: #2b7bd8;
+    text-decoration: none;
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.DataAmount .MessageListTxt .Word a:hover {
+    background: #4e8f6c;
+    color: #ffffff !important;
+    text-decoration: none !important;
+}
+
+.DataAmount .MessageListTxt .Word a:focus,
+.DataAmount .MessageListTxt .Word a:active {
+    background: #4e8f6c;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    outline: none;
+}
+
+.DataAmount .MessageListTxt .Word a {
+    color: #2b7bd8;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.DataAmount .MessageListTxt .Word a:hover {
+    color: #1a5fb4;
+    text-decoration: underline;
+}
+
+.DataAmount .MessageListTxt .Word a:focus,
+.DataAmount .MessageListTxt .Word a:active {
+    color: #1a5fb4;
+    background: transparent;
+    outline: none;
+}
+
+.DataAmount .MessageListTxt .Word a::selection {
+    background: #cfe8ff;
+    color: #1a5fb4;
+}
+
+/* 底部查看更多链接 */
+.DataAmount .MoreWrap {
+    text-align: right;
+    margin-top: 14px;
+}
+
+.WordListMoreLink {
+    display: inline-block;
+    font-size: 13px;
+    color: #666;
+    text-decoration: none;
+    padding: 4px 0;
+}
+
+.WordListMoreLink:hover {
+    color: #228a30;
+    text-decoration: underline;
+}
+
+/* ----- search/default.aspx 搜索页样式优化 ----- */
+.SearchPage {
+    padding: 0;
+}
+
+/* 整体主卡片 */
+.SearchMainCard {
+    max-width: 860px;
+    margin: 48px auto;
+    background: #fffdf8;
+    border: 1px solid #ece6da;
+    border-radius: 18px;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.06);
+    padding: 48px 56px;
+}
+
+/* 主标题 */
+.SearchMainTitle {
+    font-size: 44px;
+    font-weight: 600;
+    color: #444;
+    text-align: center;
+    margin: 0 0 10px 0;
+    line-height: 1.1;
+}
+
+/* 副标题 */
+.SearchSubTitle {
+    font-size: 16px;
+    color: #8c867d;
+    text-align: center;
+    margin: 0 0 26px 0;
+    line-height: 1.4;
+}
+
+/* Tabs 样式 */
+.SearchTabs {
+    margin-bottom: 18px;
+}
+
+.SearchTabs ul.TabbedPanelsTabGroup {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    border-bottom: 1px solid #eee8e0;
+    padding: 0;
+    margin: 0;
+    background: none !important;
+}
+
+.SearchTabs .TabbedPanelsTab {
+    float: none;
+    width: auto;
+    min-width: 70px;
+    padding: 14px 16px;
+    margin: 0;
+    border: none;
+    background: transparent !important;
+    font-size: 15px;
+    color: #8c867d;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.SearchTabs .TabbedPanelsTab:hover {
+    color: #4e8f6c;
+    background: #f8faf6 !important;
+}
+
+.SearchTabs .TabbedPanelsTabSelected {
+    color: #4e8f6c;
+    font-weight: 500;
+    background: transparent !important;
+}
+
+.SearchTabs .TabbedPanelsTabSelected:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -1px;
+    width: 24px;
+    height: 2px;
+    background: #4e8f6c;
+}
+
+/* 搜索输入行 */
+.SearchInputRow {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 12px;
+    background: none !important;
+}
+
+.SearchInputRow .SearchInputCol {
+    flex: 1;
+    float: none;
+    width: auto;
+    margin: 0;
+    background: none !important;
+    padding: 0 !important;
+}
+
+.SearchInputRow .SearchInputCol .SearchInput {
+    width: 100% !important;
+    height: 50px;
+    padding: 0 20px;
+    border: 1px solid #ddd8ce;
+    border-radius: 14px;
+    background: #fff;
+    font-size: 16px;
+    color: #333;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.SearchInputRow .SearchInputCol .SearchInput:focus {
+    outline: none;
+    border-color: #4e8f6c;
+    box-shadow: 0 0 0 3px rgba(78, 143, 108, 0.08);
+}
+
+.SearchInputRow .SearchBtnCol {
+    float: none;
+    width: auto;
+    margin: 0;
+    background: none !important;
+    padding: 0 !important;
+}
+
+.SearchSubmitBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 110px;
+    height: 50px;
+    background: #4e8f6c;
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-size: 16px;
+    text-decoration: none !important;
+    cursor: pointer;
+    transition: background 0.2s;
+    box-sizing: border-box;
+}
+
+.SearchSubmitBtn:hover {
+    background: #3f7d5c;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* 提示文字 */
+.SearchHint {
+    font-size: 13px;
+    color: #a8a39b;
+    padding-left: 4px;
+}
+
+/* 彻底清除旧蓝色背景图 */
+.DetailsSearchBox,
+.DetailsSearchBox .TabbedPanels,
+.DetailsSearchBox .TabbedPanelsContentGroup,
+.DetailsSearchBox .TabbedPanelsContent {
+    background: none !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+/* 覆盖旧的浮动样式和背景图 */
+.SearchPage .SearchBoxMore {
+    background: none !important;
+    background-image: none !important;
+}
+

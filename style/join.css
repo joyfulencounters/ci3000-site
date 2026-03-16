@@ -1,0 +1,47 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+body {margin:0;
+	background-image: url(../images/index/bg.gif);
+	background-repeat: repeat-x;}
+img{ border:0;}
+body,td,th {font-family:Verdana , 微软雅黑; font-size: 12px; color: #acacac; line-height:18px;}
+#SigninBox{width:960px; margin:auto; clear:both;}
+#MainBox{width:960px; margin:auto; clear:both;}
+.loginleft{ background-image:url(../images/member/member_01.gif); width:531px; height:313px; float:left;}
+.loginleft1{ margin-top:91px; margin-left:140px; }
+.loginright{ background-image:url(../images/member/member_02.gif); width:429px; height:313px; float:right;}
+.loginrightButton{ margin-top:210px; margin-left:110px; width:216px;}
+.Bottom{ background-image:url(../images/member/member_31.gif); height:41px; float:left; width:948px;}
+.Bottom1{ width:6px; float:left;}
+.BottomText{ width:440px; float:left; height:41px; line-height:41px; padding-left:10px;}
+.BottomText1{ width:440px; float: right; height:41px; line-height:41px; text-align:right; padding-right:10px;}
+.White{ color:#FFF; text-decoration:underline;}
+.White a{ color:#FFF; text-decoration:underline;}
+.White a:hover { color:#FFF; text-decoration:none;}
+.InputBox{width:200px; height:24px; font-size:14px; border:#FFF 1px solid; line-height:24px; color:#717171}
+
+.LoginButton{ background-image:url(../images/member/LoginButton1.gif); width:960px; height:53px;}
+.LoginButton1{ padding-top:10px; margin-left:700px;}
+
+.LoginButton12{ background-image:url(../images/help/LoginButton1.gif); width:960px; height:53px;}
+.LoginButton11{  padding-top:5px;}
+
+
+.BgBox{	background-image: url(../images/member/bg_box.gif); background-repeat: repeat-x; height:168px;}
+
+.Black{ color:#000; font-size:14px;}
+.Red{ color:#F00}
+.gray{ color:#7f7f7f; font-size:14px; text-decoration:underline;}
+.gray a{ color:#7f7f7f; font-size:14px; text-decoration:underline;}
+.gray a:hover{ color:#000; font-size:14px; text-decoration:none;}
+.gray1{ color:#7f7f7f; font-size:12px;}
+.BlueTop{ color:#3ab7e8; font-weight:600;}
+.BlueTop a{ color:#3ab7e8; font-weight:600;}
+.BlueTop a:hover{ color:#41ae2d; font-weight:600; text-decoration:none;}
+.InputTxtBox{width:300px; height:22px; border:#dedede 1px solid; line-height:22px; color:#717171}
+
+
+
+
+

@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AjaxPost.aspx.cs" Inherits="Ajax_AjaxPost" %>

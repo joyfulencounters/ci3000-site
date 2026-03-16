@@ -1,0 +1,153 @@
+
+#wrapper {
+    width: 654px;
+    margin: 0px auto 20px auto;
+	height:216px;
+    background-color: transparent;
+    background-image: url('/images/bg2.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    border-radius: 12px;
+    padding: 0 60px;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#intro {
+    padding-bottom: 10px;
+}
+
+#slider {
+    width: 654px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.scroll {
+	overflow: hidden;
+	width: 654px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.scrollContainer {
+	position: relative;
+	margin-top:20px;
+}
+
+.scrollContainer div.panel {
+    width: 654px;
+}
+
+
+.inside {
+	padding: 10px; text-align:center;
+}
+
+.word-banner-text {
+    display: block;
+    margin: 0 auto 8px auto;
+    width: 100%;
+    line-height: 1;
+    font-size: 56px;
+    font-weight: 700;
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    color: #767067;
+    text-decoration: none;
+    text-align: center;
+    letter-spacing: 8px;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.9), 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+.word-banner-text:hover {
+    color: #458062;
+    text-decoration: none;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.95), 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.hero-word-wrap {
+    width: 100%;
+    text-align: center;
+}
+.hero-subtitle {
+    font-size: 12px;
+    color: #a69f93;
+    letter-spacing: 3px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+
+.inside p {
+	font-size: 11px;
+	color: #ccc;
+}
+
+
+.scrollButtons {
+	position: absolute;
+	top: 50%;
+    transform: translateY(-50%);
+	cursor: pointer;
+	z-index:10;
+	font-size: 32px;
+	font-weight: 300;
+	color: #635d54;
+	line-height: 1;
+	user-select: none;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.7) !important;
+    border: none !important;
+    width: 50px !important;
+    height: 50px !important;
+    min-width: 50px !important;
+    min-height: 50px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    flex-shrink: 0 !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+.scrollButtons.left {
+    left: 30px;
+}
+
+.scrollButtons.right {
+    right: 30px;
+}
+
+.scrollButtons:hover {
+    opacity: 1;
+    color: #458062;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 3px 16px rgba(0, 0, 0, 0.12);
+}
+
+.hide {
+    display: none;
+}
+
+
+
+
+
+/*ǧ���������ֽ���*/
+.holder {width:240px; margin:5px; padding:5px; float:left; margin-left:20px;��font-size:12px;}
+.holder h2 {text-align:left;}
+a.hid {color:#000; text-decoration:none; outline-style:none; position:relative; z-index:500;  height:30px; font-size:12px;}
+a.hid em {display:none;}
+a.hid:hover {text-decoration:none;}
+a.hid:active, a.hid:focus {background:#fff;}
+a.hid:active span, a.hid:focus span {display:none;}
+a.hid:active em, a.hid:focus em {display:block; background:#fff; color:#636b75; width:240px; font-style:normal; cursor:default; padding:5px 5px 20px 5px; position:absolute; left:-6px; top:-5px;  border-width:0 1px 1px 1px;}
+.STYLE1 {font-size: 12px}
+

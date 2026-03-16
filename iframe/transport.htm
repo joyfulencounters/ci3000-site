@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+    <title>����</title>    
+    <style type="text/css">
+        span{ width:22px; height:22px; margin:0px 10px;}
+    </style>        
+    <script language="javascript" type="text/javascript">
+    function FunSearch(type)
+    {
+        var locat="",sear="";
+        switch(type){
+            case "baidu":
+                document.getElementById("search_form1").myselectvalue.value = 0;                
+                break;        
+            case "google":             
+                locat = "http://www.google.cn/search?q=";
+                sear = document.getElementById("word").value=""?parent.document.getElementById("sp_lit").innerText:document.getElementById("word").value;
+                break;
+            case "taobao":             
+                locat = "http://search.taobao.com/search?commend=all&isnew=2&source=search1&q=";
+                sear = document.getElementById("word").value=""?parent.document.getElementById("sp_lit").innerText:document.getElementById("word").value;
+                break;
+            case "baiduPic":
+                document.getElementById("search_form1").myselectvalue.value = 1;
+                break;
+            case "dangdang":             
+                locat = "http://search.dangdang.com/search.php?catalog=&SearchFromTop=1&key=";
+                sear = document.getElementById("word").value=""?parent.document.getElementById("sp_lit").innerText:document.getElementById("word").value;
+                break;
+            case "douban":
+		//locat = "http://www.douban.com/subject_search?search_text=";
+		locat = "http://www.douban.com";
+                //sear = document.getElementById("word").value=""?parent.document.getElementById("sp_lit").innerText:document.getElementById("word").value;
+                break;
+            case "weijibaike":
+                locat = "http://zh.wikipedia.org/zh-cn/"; //http://so.hudong.com/search.do?so=doc&isFrom=intoDoc&q=";
+                sear = document.getElementById("word").value=""?parent.document.getElementById("sp_lit").innerText:document.getElementById("word").value;
+                break;
+            case "youku":
+                locat = "http://so.youku.com/search_video/q_";
+                sear = document.getElementById("word").value=""?parent.document.getElementById("sp_lit").innerText:document.getElementById("word").value;
+                break;  
+            case "zhuoyue":
+                locat = "http://www.amazon.cn/s/ref=nb_ss?url=search-alias%3Daps&Go.x=8&Go.y=12&searchKind=keyword&keywords=";
+                sear = document.getElementById("word").value=""?parent.document.getElementById("sp_lit").innerText:document.getElementById("word").value;
+                break;
+            case "flicker":
+                //locat = "http://www.flickr.com/search/?w=all&m=text&q=";
+		locat = "http://www.flickr.com";
+                //sear = document.getElementById("word").value=""?parent.document.getElementById("sp_lit").innerText:document.getElementById("word").value;
+                break;
+            default:
+                document.getElementById("search_form1").myselectvalue.value = 0;
+                break;    
+        }
+        if(type == "baidu" || type =="baiduPic")
+            document.getElementById("inputSub").click(); 
+        else
+            window.open(locat + sear);
+    }    
+    function gowhere1(formname)
+    {
+        var url;
+        if (formname.myselectvalue.value == "0")
+        {
+            url = "http://www.baidu.com/baidu";
+            document.search_form1.tn.value = "baidu";
+            formname.method = "get";
+        }        
+        else if (formname.myselectvalue.value == "1")
+        {
+            document.search_form1.tn.value = "baiduiamge";
+            document.search_form1.ct.value = "201326592";
+            document.search_form1.cl.value = "2";
+            document.search_form1.lm.value = "-1";
+            url = "http://image.baidu.com/i";
+        }
+        formname.action = url;
+        return true;
+    }
+   // window.onload = parent.onld();
+      </script>
+</head>
+<body>
+    <form name="search_form1" id="search_form1" target="_blank" onsubmit="return gowhere1(this)" accept-charset="GBK">
+    <div style="display:none;">
+    <input name="myselectvalue" id="myselectvalue" type="hidden" value="0" /><input name="tn" type="hidden" /><input name="ct" type="hidden" />
+    <input name="lm" type="hidden" /><input name="cl" type="hidden" /><input name="rn" type="hidden" />
+    <input id="word" name="word" size="40" value="" />
+    <input name="inputSub" id="inputSub" type="submit" value="�ٶ�����" />
+    </div>
+    </form>
+    <script language="javascript" type="text/javascript">
+        parent.onld();
+    </script>
+</body>
+</html>

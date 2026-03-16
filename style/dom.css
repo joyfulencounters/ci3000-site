@@ -1,0 +1,192 @@
+/*	-------------------------------------------------------------
+	MaaYee.com
+	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	Description:	基本样式
+	Filename:		be.dom.css
+	Author:         xw
+	-------------------------------------------------------------	*/
+	/* base dom
+	--------------------------------------------------------*/
+* {
+		margin: 0;
+		padding: 0;
+		/*letter-spacing: normal;*/
+	}
+	
+	body{		
+		font: 14px ����;
+		/*font:14px Arial, Helvetica, sans-serif;*/
+
+	}
+/* *+html body{font-family:微软雅黑,宋体}*/
+	div {
+		font-size: 1em;
+	}
+	
+	img {
+		border: 0;
+	}
+	
+	hr {
+		 height: 1px;
+		 padding: 0;
+		 margin: 0;
+	}
+/*	
+	img{
+	vertical-align: middle;
+	border: 0px none;
+	max-width:100%;
+	height:auto;
+}
+*+html img {
+   vertical-align: top;
+}
+
+*/
+
+/*=links*/
+	a,
+	a:link{
+		color: #004499;
+/*		text-decoration: none;*/
+		text-decoration: underline;
+		font-family: Arial, Helvetica, sans-serif;
+		/*font-family: Tahoma, sans-serif;*/
+	}
+	
+/*	a:visited {
+		color: #83006F;
+		background-color: transparent;
+	}*/
+		
+	a:hover {
+		/*color: #BC2931;*/
+		color: #ff6600;
+		text-decoration: underline;
+	}
+/*end links*/
+
+
+/*=headings*/
+	h1,h2,h3,h4,h5,h6{
+		padding: 0;
+	   color: #000;
+		/*line-height: 1.5;*/
+	}
+	h1 {
+		font-size: 2em;
+	}
+	h2 {
+		font-size: 1.5em;
+	}
+	h3 {
+		font-size: 1.3em;
+	}
+	h4 {
+		font-size: 1.2em;
+	}
+	h5 {
+		font-size: 1em;
+	}
+	h6 {
+		font-size: 0.875em;
+	}
+/*=end heading*/
+
+
+/*=text*/
+	p {
+		line-height:1.5;
+	}
+
+/*end text*/
+
+
+/*=list*/
+
+	ul {
+		padding: 0;
+		margin: 0;
+		list-style: none;
+	}
+	ul li {
+		padding: 0;
+	}
+	ol {
+		margin: 0;
+	}
+	dl {
+		margin: 0;
+		padding: 0;
+	}
+	dl dt {
+		font-weight: bold;
+		padding: 0;
+	}
+	dl dd {
+		padding: 0;
+	}
+/*end list*/
+
+/* images
+--------------------------------------------------------*/
+	form {
+		margin:0;
+		padding:0;
+	}
+	
+   input {
+      margin: 0;
+		padding: 2px;
+	}
+	textarea{
+		padding: 2px;
+		border: 1px solid #969696;
+	}
+	input.file {
+		height: auto;
+		width: 250px;
+	}
+	input.button {
+		cursor:pointer;
+	   height:24px;
+	   padding:1px 5px;
+		border: 1px solid #D49C48;
+		background:#FFF url(/images/admin/btn_button.gif) repeat-x left center;
+		font-family:Arial, Helvetica, sans-serif;
+		font-weight:normal;	
+		line-height:19px;
+		font-size:13px;
+	}
+	input.image {
+		border: none;
+		width: auto;
+		height: auto; 
+	}
+	input.text{
+		/*color: #ff6600;*/
+		/*border: 1px solid #ccc;*/
+	   border: 1px solid #969696;
+		line-height: 16px;
+		height: 16px;
+	}
+	
+	input.readonly {
+	background-color: transparent;
+	border: none;
+	}
+	
+	fieldset{
+		padding: 10px;
+	}
+	legend{
+		font-size: 14px;
+		color:#666;
+		font-weight: bold;	
+	}
+	label{
+		cursor:pointer;
+	}
+	
+
