@@ -1907,13 +1907,21 @@ DIV.yellow SPAN.disabled {
 
 /* 整体主卡片 */
 .SearchMainCard {
-    max-width: 860px;
-    margin: 48px auto;
+    width: 860px;
+    margin: 56px auto 0;
+    padding: 48px 56px 44px;
     background: #fffdf8;
     border: 1px solid #ece6da;
     border-radius: 18px;
+    box-sizing: border-box;
     box-shadow: 0 2px 14px rgba(0,0,0,0.06);
-    padding: 48px 56px;
+}
+
+/* 清除浮动确保高度正确撑开 */
+.SearchMainCard:after {
+    content: "";
+    display: block;
+    clear: both;
 }
 
 /* 主标题 */
@@ -1931,60 +1939,87 @@ DIV.yellow SPAN.disabled {
     font-size: 16px;
     color: #8c867d;
     text-align: center;
-    margin: 0 0 26px 0;
+    margin: 0 0 28px 0;
     line-height: 1.4;
 }
 
-/* Tabs 样式 */
-.SearchTabs {
-    margin-bottom: 18px;
+/* Tabs 容器 */
+.SearchMainCard #TabbedPanels1 {
+    position: static;
+    float: none;
+    width: 100%;
+    margin: 28px auto 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.SearchTabs ul.TabbedPanelsTabGroup {
+/* Tabs 样式 */
+.SearchMainCard .TabbedPanelsTabGroup {
     display: flex;
     justify-content: center;
-    gap: 4px;
-    border-bottom: 1px solid #eee8e0;
+    align-items: center;
+    gap: 80px;
+    margin: 0 0 20px 0;
     padding: 0;
-    margin: 0;
+    list-style: none;
+    width: auto;
+    border-bottom: 1px solid #eee8e0;
     background: none !important;
 }
 
-.SearchTabs .TabbedPanelsTab {
+.SearchMainCard .TabbedPanelsTab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     float: none;
     width: auto;
     min-width: 70px;
-    padding: 14px 16px;
+    height: 48px;
+    padding: 0 16px;
     margin: 0;
     border: none;
     background: transparent !important;
     font-size: 15px;
+    line-height: 1;
     color: #8c867d;
     cursor: pointer;
     position: relative;
     transition: all 0.2s ease;
 }
 
-.SearchTabs .TabbedPanelsTab:hover {
+.SearchMainCard .TabbedPanelsTab:hover {
     color: #4e8f6c;
-    background: #f8faf6 !important;
-}
-
-.SearchTabs .TabbedPanelsTabSelected {
-    color: #4e8f6c;
-    font-weight: 500;
     background: transparent !important;
 }
 
-.SearchTabs .TabbedPanelsTabSelected:after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: -1px;
-    width: 24px;
-    height: 2px;
-    background: #4e8f6c;
+.SearchMainCard .TabbedPanelsTabSelected {
+    color: #4e8f6c;
+    font-weight: 600;
+    background: transparent !important;
+}
+
+.SearchMainCard .TabbedPanelsTabSelected:after {
+    display: none !important;
+    content: none;
+}
+
+/* Tab 内容容器 */
+.SearchMainCard .TabbedPanelsContentGroup {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: static;
+    float: none;
+}
+
+.SearchMainCard .TabbedPanelsContent {
+    width: 100%;
+    max-width: 700px;
+    position: static;
+    float: none;
+    margin: 0;
+    padding: 0;
 }
 
 /* 搜索输入行 */

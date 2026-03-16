@@ -71,7 +71,6 @@
                       <div class="SearchBtnCol"><a href="javascript:void(0);" onclick="WsearchD();"
     class="SearchSubmitBtn">搜索</a></div>
                   </div>
-                  <div class="SearchHint">输入关键文字，可以让你的搜索更精准！</div>
               </div>
               <div class="TabbedPanelsContent">
                   <div class="SearchInputRow">
@@ -81,7 +80,6 @@
                       <div class="SearchBtnCol"><a href="javascript:void(0);" onclick="WsearchD();"
     class="SearchSubmitBtn">搜索</a></div>
                   </div>
-                  <div class="SearchHint">输入关键文字，可以让你的搜索更精准！</div>
               </div>
               <div class="TabbedPanelsContent">
                   <div class="SearchInputRow">
@@ -91,7 +89,6 @@
                       <div class="SearchBtnCol"><a href="javascript:void(0);" onclick="WsearchD();"
     class="SearchSubmitBtn">搜索</a></div>
                   </div>
-                  <div class="SearchHint">输入关键文字，可以让你的搜索更精准！</div>
               </div>
               <div class="TabbedPanelsContent">
                   <div class="SearchInputRow">
@@ -101,7 +98,6 @@
                       <div class="SearchBtnCol"><a href="javascript:void(0);" onclick="WsearchD();"
     class="SearchSubmitBtn">搜索</a></div>
                   </div>
-                  <div class="SearchHint">输入关键文字，可以让你的搜索更精准！</div>
               </div>
           </div>
       </div>

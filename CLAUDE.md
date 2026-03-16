@@ -42,3 +42,6 @@ UI风格：
 - 不要修改文件编码
 - 只改 CSS，不重写 HTML 文案
 - 如果必须改 HTML，只增删标签，不改中文内容本身
+
+
+本地项目已成功关联到 GitHub 仓库 git@github.com:joyfulencounters/ci3000-site.git
