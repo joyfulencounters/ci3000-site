@@ -2074,7 +2074,7 @@ DIV.yellow SPAN.disabled {
     width: 110px;
     height: 50px;
     background: #4e8f6c;
-    color: #fff;
+    color: #ffffff !important;
     border: none;
     border-radius: 14px;
     font-size: 16px;
@@ -2086,7 +2086,7 @@ DIV.yellow SPAN.disabled {
 
 .SearchSubmitBtn:hover {
     background: #3f7d5c;
-    color: #fff;
+    color: #ffffff !important;
     text-decoration: none;
 }
 
