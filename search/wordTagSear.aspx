@@ -69,7 +69,7 @@
             <ItemTemplate>
                 <div class="SearchBoxWordF" style="height:30px; background:none; background-color:transparent;">
                     <div>
-                        <img src="/images/search/search_10.gif" />
+                        <img src="/images/search/arrow.png" width="19" height="19" style="vertical-align:middle;" />
                         <span class="Blue">
                             <a href='/word.aspx?c=<%# Eval("w_id") %>'><%# Eval("name") %></a>
                         </span>
