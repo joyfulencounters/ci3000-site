@@ -22,7 +22,14 @@ public partial class _Default : BasePage
             Show_Users_News();
             Show_Word_CollectionMost();
             Show_Word_CMost();
-            Show_WWl_Remark_Index();
+            try
+            {
+                Show_WWl_Remark_Index();
+            }
+            catch
+            {
+                // 忽略错误，继续加载其他模块
+            }
             Show_wordlist_first_Index();
             Show_NCNC_Index();
         }
@@ -88,9 +95,21 @@ public partial class _Default : BasePage
     #region 他们说。。。
     private void Show_WWl_Remark_Index()
     {
-        DataTable dt = words.Show_WWl_Remark_Index(5);
-        rep_remark_say.DataSource = dt;
-        rep_remark_say.DataBind();
+        try
+        {
+            DataTable dt = words.Show_WWl_Remark_Index(5);
+            rep_remark_say.DataSource = dt;
+            rep_remark_say.DataBind();
+        }
+        catch (Exception ex)
+        {
+            // 如果数据库查询失败，不影响首页加载
+            rep_remark_say.DataSource = null;
+            rep_remark_say.DataBind();
+
+            // 可以记录日志
+            System.Diagnostics.Debug.WriteLine("Show_WWl_Remark_Index error: " + ex.Message);
+        }
     }
     protected void rep_remark_say_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
