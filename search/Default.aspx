@@ -66,7 +66,7 @@
               <div class="TabbedPanelsContent">
                   <div class="SearchInputRow">
                       <div class="SearchInputCol"><input name="q" type="text" class="SearchInput" id="headqW"
-    value="搜索一个词" onkeyup="return txtonkeyup()" onblur="onblurNull()"
+    value="" placeholder="搜索一个词" onkeyup="return txtonkeyup()" onblur="onblurNull()"
     onfocus="if(this.value=='搜索一个词')this.value='';" /></div>
                       <div class="SearchBtnCol"><a href="javascript:void(0);" onclick="WsearchD();"
     class="SearchSubmitBtn">搜索</a></div>
@@ -75,7 +75,7 @@
               <div class="TabbedPanelsContent">
                   <div class="SearchInputRow">
                       <div class="SearchInputCol"><input name="q" type="text" class="SearchInput" id="headqWl"
-    value="搜索词单" onkeyup="return txtonkeyup()" onblur="onblurNull()" onfocus="if(this.value=='搜索词单')this.value='';"
+    value="" placeholder="搜索词单" onkeyup="return txtonkeyup()" onblur="onblurNull()" onfocus="if(this.value=='搜索词单')this.value='';"
     /></div>
                       <div class="SearchBtnCol"><a href="javascript:void(0);" onclick="WsearchD();"
     class="SearchSubmitBtn">搜索</a></div>
@@ -84,7 +84,7 @@
               <div class="TabbedPanelsContent">
                   <div class="SearchInputRow">
                       <div class="SearchInputCol"><input name="q" type="text" class="SearchInput" id="headqUs"
-    value="搜索用户" onkeyup="return txtonkeyup()" onblur="onblurNull()" onfocus="if(this.value=='搜索用户')this.value='';"
+    value="" placeholder="搜索用户" onkeyup="return txtonkeyup()" onblur="onblurNull()" onfocus="if(this.value=='搜索用户')this.value='';"
     /></div>
                       <div class="SearchBtnCol"><a href="javascript:void(0);" onclick="WsearchD();"
     class="SearchSubmitBtn">搜索</a></div>
@@ -93,7 +93,7 @@
               <div class="TabbedPanelsContent">
                   <div class="SearchInputRow">
                       <div class="SearchInputCol"><input name="q" type="text" class="SearchInput" id="headqT"
-    value="例如：幸福，惬意，惆怅，无奈，凄凉……" onkeyup="return txtonkeyup()" onblur="onblurNull()"
+    value="" placeholder="例如：幸福，惬意，惆怅，无奈，凄凉……" onkeyup="return txtonkeyup()" onblur="onblurNull()"
     onfocus="if(this.value=='例如：幸福，惬意，惆怅，无奈，凄凉……')this.value='';" /></div>
                       <div class="SearchBtnCol"><a href="javascript:void(0);" onclick="WsearchD();"
     class="SearchSubmitBtn">搜索</a></div>

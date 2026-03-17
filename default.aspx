@@ -109,7 +109,8 @@
 				<ul>
                     <asp:Repeater ID="rep_CollMost" runat="server">
                         <ItemTemplate>
-                    <li><img src="/images/index/<%#(Container.ItemIndex +1)%>.gif" />　<a href="/word.aspx?c=<%#Eval("w_id") %>"><%#Eval("name") %>（<%#Eval("collectionnum")%>）</a>　　　　<span class="Name"><a href="/user/default.aspx?u=<%#Eval("userid") %>"><%#Eval("realname") %></a></span></li>
+ <li><a href="/word.aspx?c=<%#Eval("w_id") %>"><%#Eval("name") %>（<%#Eval("collectionnum")%>）</a>　　　　<span class="Name"><a 
+  href="/user/default.aspx?u=<%#Eval("userid") %>"><%#Eval("realname") %></a></span></li>
                         </ItemTemplate>
                     </asp:Repeater>					
 				</ul>

@@ -1959,7 +1959,7 @@ DIV.yellow SPAN.disabled {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 80px;
+    gap: 32px;
     margin: 0 0 20px 0;
     padding: 0;
     list-style: none;
@@ -2057,6 +2057,18 @@ DIV.yellow SPAN.disabled {
     outline: none;
     border-color: #4e8f6c;
     box-shadow: 0 0 0 3px rgba(78, 143, 108, 0.08);
+}
+
+.SearchInput::placeholder{
+    color:#9a9a9a;
+}
+
+.SearchInput::-webkit-input-placeholder{
+    color:#9a9a9a;
+}
+
+.SearchInput:-ms-input-placeholder{
+    color:#9a9a9a;
 }
 
 .SearchInputRow .SearchBtnCol {
