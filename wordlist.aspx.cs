@@ -124,7 +124,7 @@ public partial class wordlist : BasePage
     }
 
     //添加词单评论
-    protected void Imgbtn_Ok_Click(object sender, ImageClickEventArgs e)
+    protected void Imgbtn_Ok_Click(object sender, EventArgs e)
     {
         string content = txt_ContentR.Value;
         int wlid = Data_Public.getQueryStringToInt("w");
