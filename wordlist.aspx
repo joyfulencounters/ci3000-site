@@ -5,6 +5,27 @@
 【词单】<asp:Literal ID="lit_titleName" runat="server"></asp:Literal> <%= WebQywy.Data_Public.GetTitleAppend()%>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<style>
+.WordListTitle {
+    font-size: 16px;
+    font-weight: 500;
+    color: #228a30;
+    line-height: 1.4;
+    padding-left: 8px;
+    border-left: 3px solid #7fcf72;
+}
+.ContentLeftA { margin-top: 0 !important; }
+.ContentLeft1,
+.CreateWordlistA,
+.CreateWordlistC,
+.CreateWordlistE,
+#ShowList {
+    height: auto !important;
+    min-height: 0 !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+</style>
     <script src="/js/addword.js" language="javascript" type="text/javascript"></script>
     <script src="/js/pages.js" language="javascript" type="text/javascript"></script>
     <script language="javascript" type="text/javascript">
@@ -37,7 +58,7 @@
 		  
 		<div class="ContentLeft1">
           <div class="ContentLeftTitle1">
-              <div class="ContentText" style=" padding:20px 0px;"><img src="images/word/word_20.gif"/></div>
+              <div class="ContentText WordListTitle">词单</div>
           </div>        
           <div class="CreateWordlistA">
 
@@ -76,7 +97,7 @@
         
 		<div class="ContentLeftA">
 		  <div class="ContentLeftTitle">
-			  <div class="ContentText"><img src="images/word/word_010.gif" /></div>			  
+			  <div class="ContentText WordListTitle">词单评论</div>			  
 		  </div>        
 		  <div>
 		  <a name="remark"></a>
