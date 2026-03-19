@@ -18,7 +18,7 @@ function ShowPage(CountPage,PageSize,CurentPage)
 			for(var i=1;i<=CountPage;i++) //循环分页数据
 			{
 				if(i==CurentPage){
-					tempHTML = tempHTML+'<span  class="previous"> <a href="javascript:void(0);">'+i+'</a></span>';
+					tempHTML = tempHTML+'<span class="current"> <a href="javascript:void(0);">'+i+'</a></span>';
 				}
 				else {
 				    tempHTML = tempHTML+'<span><a href="javascript:CurrentPage('+CountPage+','+PageSize+','+i+')">'+i+'</a></span>';
@@ -41,7 +41,7 @@ function ShowPage(CountPage,PageSize,CurentPage)
 			tempHTML = '<span class="next"><a href="javascript:void(0);">首页</a></span><span class="next"><a href="javascript:void(0);">上一页</a></span>';
 		}
 		if(CurentPage==1){
-			tempHTML = tempHTML+'<span class="next"><a href="javascript:void(0);">1</a></span>';
+			tempHTML = tempHTML+'<span class="current"><a href="javascript:void(0);">1</a></span>';
 		}
 		else{			
 			tempHTML = tempHTML+'<span><a href="javascript:CurrentPage('+CountPage+','+PageSize+',1)">1</a></span>';
@@ -100,7 +100,7 @@ function ShowPage(CountPage,PageSize,CurentPage)
 		//当前页		
 		if(CurentPage!=1&&CurentPage!=CountPage)
 		{
-			tempHTML = tempHTML+'<span class="next"><a href="javascript:void(0);">'+CurentPage+'</a></span>';
+			tempHTML = tempHTML+'<span class="current"><a href="javascript:void(0);">'+CurentPage+'</a></span>';
 		}
 		//右侧
 		if(IfDOT_R==1)
@@ -121,7 +121,7 @@ function ShowPage(CountPage,PageSize,CurentPage)
 		
 		//尾
 		if(CurentPage==CountPage){
-		    tempHTML = tempHTML + '<span class="next"><a href="javascript:void(0);">' + CountPage + '</a></span>';
+		    tempHTML = tempHTML + '<span class="current"><a href="javascript:void(0);">' + CountPage + '</a></span>';
 		}
 		else{
 		    tempHTML = tempHTML+'<span><a href="javascript:CurrentPage('+CountPage+','+PageSize+','+CountPage+')">'+CountPage+'</a></span>';

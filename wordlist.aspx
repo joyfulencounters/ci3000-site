@@ -27,6 +27,7 @@
     border-left: 3px solid #7fcf72;
 }
 .wordlistCommentSection > .ContentLeftA { margin-top: 30px !important; }
+.wordlistMainSection { margin-top: 25px !important; margin-bottom: 0 !important; }
 .ContentLeft1.commentSection { margin-top: 10px !important; }
 .ContentLeft1,
 .CreateWordlistA,
@@ -41,6 +42,38 @@
 
 /* 评论输入区样式 */
 .commentSection { margin-top: 0 !important; }
+/* 分页样式 - 移除边框 */
+#pages.yellow,
+.wordlistPager.yellow {
+    margin: 30px 3px 3px 3px !important;
+    padding: 0 !important;
+}
+.wordlistMainSection .CreateWordlistD ul {
+    margin-bottom: 20px !important;
+}
+#pages.yellow A, #pages.yellow SPAN,
+.wordlistPager.yellow A, .wordlistPager.yellow SPAN {
+    border: none !important;
+    padding: 2px 6px !important;
+    margin: 0 !important;
+    background: none !important;
+}
+/* 当前页样式 */
+DIV#pages.yellow SPAN.current,
+DIV.wordlistPager.yellow SPAN.current {
+    background: #4e8f6c !important;
+    border-radius: 4px !important;
+}
+DIV#pages.yellow SPAN.current A,
+DIV.wordlistPager.yellow SPAN.current A {
+    font-weight: bold !important;
+    color: #fff !important;
+}
+#pages.yellow A:hover,
+.wordlistPager.yellow A:hover {
+    color: #4e8f6c !important;
+    background: none !important;
+}
 .commentSection .WordBoxF {
     position: static;
 }
@@ -155,7 +188,7 @@
 		  </div>
 		</div>
 		  
-		<div class="ContentLeft1">
+		<div class="ContentLeft1 wordlistMainSection">
           <div class="ContentLeftTitle1">
               <div class="ContentText WordListTitle">词单</div>
           </div>        
@@ -175,7 +208,7 @@
 			
 			<div class="CreateWordlistC">
 				<div id="ShowList"><img src="/images/load.gif" alt="" /></div>
-	            <div style="clear:both;" class="yellow" id="pages"></div>
+	            <div style="clear:both;margin:50px 3px 3px 3px!important;padding-top:20px!important;" class="yellow wordlistPager" id="pages"></div>
 	            <script language="javascript" type="text/javascript">    
                     CurrentPage(10,10,1);
                 </script>
@@ -216,7 +249,7 @@
                 </ItemTemplate>
             </asp:Repeater>
 		  </div>
-		  <div class="yellow"><webdiyer:AspNetPager ID="AspNetPager1" runat="server" FirstPageText="首页" LastPageText="末页" NextPageText="下一页" PrevPageText="上一页" Font-Size="13px" onpagechanging="AspNetPager1_PageChanging"></webdiyer:AspNetPager></div>		
+		  <div class="yellow wordlistPager" style="font-weight:bold;"><webdiyer:AspNetPager ID="AspNetPager1" runat="server" FirstPageText="首页" LastPageText="末页" NextPageText="下一页" PrevPageText="上一页" Font-Size="13px" onpagechanging="AspNetPager1_PageChanging"></webdiyer:AspNetPager></div>		
         </div>
 
 		<div class="ContentLeft1 commentSection">
