@@ -5,6 +5,7 @@
 【词单】<asp:Literal ID="lit_titleName" runat="server"></asp:Literal> <%= WebQywy.Data_Public.GetTitleAppend()%>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<script src="/js/jtip.js" type="text/javascript"></script>
 <style>
 .WordListTitle {
     font-size: 16px;
@@ -24,6 +25,92 @@
     min-height: 0 !important;
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
+}
+
+/* 评论输入区样式 */
+.commentSection { margin-top: 0 !important; }
+.commentSection .WordBoxF {
+    position: static;
+}
+.commentSection .WordBoxF .zao{
+    display: block;
+    width: 100%;
+    text-align: right;
+    margin: 0 0 14px 0;
+    padding: 0;
+    line-height: 1;
+}
+.commentSection .WordBoxF > div:nth-child(2){
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.commentSection .WordBoxF .TextFields{
+    display: block;
+    width: 100% !important;
+    box-sizing: border-box;
+    margin: 0;
+}
+.commentSection .WordBoxF .zao img {
+    display: none;
+}
+.commentSection .WordBoxF .zao a.jTip {
+    display: inline-block;
+    font-size: 14px;
+    color: #4e8f6c;
+    text-decoration: underline;
+    cursor: help;
+    white-space: nowrap;
+}
+.commentSection .WordBoxF .zao a.jTip::before {
+    content: "怎么造句？";
+}
+.commentSection .WordBoxF .zao a.jTip:hover {
+    color: #3f7f5c;
+    text-decoration: none;
+}
+.commentSection .WordBoxF .TextFields {
+    background: #fff;
+    padding: 12px 70px 12px 12px;
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+    font-size: 14px;
+    line-height: 1.6;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.commentSection .WordBoxF .TextFields:focus {
+    border-color: #4e8f6c;
+    box-shadow: 0 0 0 2px rgba(78,143,108,0.08);
+    outline: none;
+}
+.commentSection .WordBoxF > div:first-child{
+    width: 100%;
+}
+.commentSection .WordBoxF .TextFields{
+    display: block;
+    width: 100% !important;
+    box-sizing: border-box;
+}
+.commentSection .WordBoxF1{
+    width: 100%;
+    text-align: right;
+    margin-top: 10px;
+}
+.commentSection .WordBoxF1 .CommentSubmitBtn{
+    display: inline-block;
+}
+.CommentSubmitBtn{
+    background: #4e8f6c !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 6px !important;
+    height: 36px !important;
+    padding: 0 20px !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+}
+.CommentSubmitBtn:hover{
+    background: #3f7f5c;
 }
 </style>
     <script src="/js/addword.js" language="javascript" type="text/javascript"></script>
@@ -118,19 +205,24 @@
 		  <div class="yellow"><webdiyer:AspNetPager ID="AspNetPager1" runat="server" FirstPageText="首页" LastPageText="末页" NextPageText="下一页" PrevPageText="上一页" Font-Size="13px" onpagechanging="AspNetPager1_PageChanging"></webdiyer:AspNetPager></div>		
         </div>
 
-		<div class="ContentLeft1">
+		<div class="ContentLeft1 commentSection">
           <div class="ContentLeftTitle1">
               <div class="ContentText"><img src="images/word/word_030.gif"  /></div>
 				  <div class="zao">
 				  	<div id="contentPad">
-						  <!--<span class="formInfo"><a href="ajax.htm?width=375" class="jTip" id="one" name="怎么造句:"><img src="images/word/index_01.gif"  /></a></span>-->
+						  <span class="formInfo"><a href="ajax.htm?width=375" class="jTip" id="one" name="怎么造句:"></a></span>
 				  	</div>
 				  </div>			  
           </div>        
           <div class="WordBoxF">
+              <div class="zao">
+                  <div id="contentPad">
+                      <span class="formInfo"><a href="ajax.htm?width=375" class="jTip" id="two" name="怎么造句:"></a></span>
+                  </div>
+              </div>
               <div> <textarea class="TextFields" value="把你的想法说出来..." onfocus="if(this.value=='把你的想法说出来...')this.value='';" id="txt_ContentR" runat="server" name="textarea" ></textarea>
               </div>
-              <div class="WordBoxF1"><asp:ImageButton ID="Imgbtn_Ok" runat="server" ImageUrl="/images/word/word_btt.gif" onclick="Imgbtn_Ok_Click" OnClientClick='return CkLogin(uid);' /></div>          
+              <div class="WordBoxF1"><asp:Button ID="Imgbtn_Ok" runat="server" Text="提交" CssClass="CommentSubmitBtn" OnClientClick='return CkLogin(uid);' onclick="Imgbtn_Ok_Click" /></div>          
 		  </div>        
         </div>	
 	</div>    
