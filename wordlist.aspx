@@ -51,6 +51,37 @@
 .wordlistMainSection .CreateWordlistD ul {
     margin-bottom: 20px !important;
 }
+/* 头像改为方形，加灰色外框 */
+.PersonalWordlist .Autographedphotos {
+    border-radius: 0 !important;
+    width: 90px !important;
+    height: 90px !important;
+    min-width: 90px !important;
+    min-height: 90px !important;
+    padding: 6px !important;
+    border: 1px solid #ccc !important;
+    box-sizing: content-box !important;
+}
+.PersonalWordlist .Autographedphotos a,
+.PersonalWordlist .Autographedphotos a img {
+    border-radius: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+/* 头像和昵称整体往左移动 */
+.PersonalWordlistLeft {
+    padding-left: 20px !important;
+}
+/* 右侧四个方块和此刻心情往右移动 */
+.PersonalWordlistRight {
+    padding-left: 17px !important;
+}
+/* 头像和昵称居中对齐 */
+.PersonalWordlistLeft {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
 #pages.yellow A, #pages.yellow SPAN,
 .wordlistPager.yellow A, .wordlistPager.yellow SPAN {
     border: none !important;
