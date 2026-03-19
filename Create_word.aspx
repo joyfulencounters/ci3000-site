@@ -4,6 +4,9 @@
     <asp:Literal ID="lit_titleName" runat="server">创建新</asp:Literal>词单<%= WebQywy.Data_Public.GetTitleAppend()%>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<style>
+.CreateWord{ background-image:none !important;}
+</style>
 <form runat="server" id="form1">
 <div class="CreateWord">
 	<div class="CreateWordA"><img runat="server" id="img_show" src="images/word/word_20.png" alt="" /></div>
