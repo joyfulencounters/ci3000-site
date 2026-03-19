@@ -124,7 +124,7 @@ public partial class Ajax_AjaxGet : BasePage
                 strb.AppendFormat("<li onmouseover=\"wlconmouseover({0})\" onmouseout=\"wlconmouseout({0})\"><a href=\"/word.aspx?c={0}\" >{1}</a>", dt.Rows[i]["w_id"].ToString(), dt.Rows[i]["name"].ToString());
                 
                 if(uc.UserID.ToString() == dt.Rows[i]["uid"].ToString())
-                    strb.AppendFormat("<a id=\"showaid_{0}\" href=\"javascript:wlcDel({0},{1},{2})\" style=\"display:none;\"><img src=\"/images/word/word_32.gif\" width=\"36\" height=\"12\" border=\"0\" /></a>",
+                    strb.AppendFormat("<a id=\"showaid_{0}\" href=\"javascript:wlcDel({0},{1},{2})\" style=\"display:none;color:#999;font-size:16px;margin-left:5px;\">×</a>",
                         dt.Rows[i]["w_id"].ToString(), dt.Rows[i]["wl_id"].ToString(), uc.UserID.ToString());
                 strb.Append("</li>");
             }
@@ -137,7 +137,7 @@ public partial class Ajax_AjaxGet : BasePage
                 strb.Append("<div class=\"CommentsText\">");
                 strb.AppendFormat("<div class=\"CreateWordlistD2\"><a href=\"/word.aspx?c={0}\" ><span class=\"BlackWord\">{1}</span></a>　　<a href=\"/user/default.aspx?u={2}\" ><span class=\"Name\">{3}</span></a> 添加于{4}                   　　　　　　被列入<span class=\"Red\">{5}</span>词单中 　　　　　　　　　　　", dt.Rows[i]["w_id"].ToString(), dt.Rows[i]["name"].ToString(),dt.Rows[i]["adduserid"].ToString(), dt.Rows[i]["realname"].ToString(), Convert.ToDateTime(dt.Rows[i]["adtime"]).ToString("yyyy-MM-dd HH:mm"), dt.Rows[i]["wlcount"].ToString());
                 if (uc.UserID.ToString() == dt.Rows[i]["uid"].ToString())
-                    strb.AppendFormat("<a href=\"javascript:wlcDel({0},{1})\"><img src=\"/images/word/word_32.gif\" width=\"36\" height=\"12\" border=\"0\" /></a>",dt.Rows[i]["w_id"].ToString(),dt.Rows[i]["wl_id"].ToString());
+                    strb.AppendFormat("<a href=\"javascript:wlcDel({0},{1})\" style=\"color:#999;font-size:16px;margin-left:5px;\">×</a>",dt.Rows[i]["w_id"].ToString(),dt.Rows[i]["wl_id"].ToString());
 
                 strb.AppendFormat("</div><div class=\"Gray\">针对{0}，{1}说道：{2}</div>", dt.Rows[i]["name"].ToString(), dt.Rows[i]["realname"].ToString(), dt.Rows[i]["content"].ToString());
                 strb.Append("</div>");

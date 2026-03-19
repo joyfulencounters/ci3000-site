@@ -7,6 +7,17 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 <script src="/js/jtip.js" type="text/javascript"></script>
 <style>
+.wordlistAddSection .MeaningWordE {
+    border-bottom: none !important;
+    margin-left: 0 !important;
+}
+.wordlistAddSection .TagSubmitBtn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 32px !important;
+    padding: 0 15px !important;
+}
 .WordListTitle {
     font-size: 16px;
     font-weight: 500;
@@ -15,7 +26,8 @@
     padding-left: 8px;
     border-left: 3px solid #7fcf72;
 }
-.ContentLeftA { margin-top: 0 !important; }
+.wordlistCommentSection > .ContentLeftA { margin-top: 30px !important; }
+.ContentLeft1.commentSection { margin-top: 10px !important; }
 .ContentLeft1,
 .CreateWordlistA,
 .CreateWordlistC,
@@ -157,7 +169,7 @@
                 <asp:Literal ID="lit_content" runat="server"></asp:Literal></h1></div> 
 			
 			<div class="CreateWordlistB">
-				<div class="CreateWordlistB2"><a id="pl" href="javascript:Whow_Word_Page('true',<%=wlid %>,1);"><img src="images/word/word_22.gif" border="0" /></a>　<a id="lb" href="javascript:Whow_Word_Page('false',<%=wlid %>,1);"><img src="images/word/word_21.gif" border="0" /></a></div>
+				<div class="CreateWordlistB2"><a id="pl" href="javascript:Whow_Word_Page('true',<%=wlid %>,1);" style="color:#4e8f6c;text-decoration:underline;">排列</a>　<a id="lb" href="javascript:Whow_Word_Page('false',<%=wlid %>,1);" style="color:#666;text-decoration:underline;">列表</a></div>
 				<div class="CreateWordlistB1"><img src="images/word/word_25.gif" /><span>评论</span>（<span class="Red"><asp:Literal ID="lit_rnum" runat="server"></asp:Literal></span>） <span class="Gray"><asp:Literal ID="lit_rtime" runat="server"></asp:Literal></span></div>	            
 			</div> 
 			
@@ -167,12 +179,14 @@
 	            <script language="javascript" type="text/javascript">    
                     CurrentPage(10,10,1);
                 </script>
-				<div class="CreateWordlistE">
+				<div class="CreateWordlistE wordlistAddSection">
 				<div>
 				<asp:Panel ID="pane_addwl" runat="server" Visible="false">
-				    <div class="CreateWordlistG">向词单添加词：<input name="n" type="text" id="Input_word" onfocus="if(this.value=='输入想要添加的词...')this.value='';" onkeyup="Onkeyup('Input_word');" value="输入想要添加的词..." size="17" maxlength="8" /></div>
-                    <div class="CreateWordlistF"><a href="javascript:void(0);" onclick="WordCheck()"><img src="images/word/word_02.gif" border="0" alt="添加新词" /></a>
-                    <span id="sp_Vili" style="color:#ff17a3;display:none;">注意：添加的词不能超过8个汉字，中间不可添加空格或其它符号</span></div></asp:Panel>
+				    <div class="MeaningWordE">
+				        <div class="Wordbttse1">向词单添加词：<input name="n" type="text" id="Input_word" onfocus="if(this.value=='输入想要添加的词...')this.value='';" onkeyup="Onkeyup('Input_word');" value="输入想要添加的词..." size="17" maxlength="8" /></div>
+                        <div class="Wordbttse"><a href="javascript:void(0);" onclick="WordCheck()" class="TagSubmitBtn">添加</a></div>
+                    </div>
+                    <span id="sp_Vili" style="color:#ff17a3;display:none;">注意：添加的词不能超过8个汉字，中间不可添加空格或其它符号</span></asp:Panel>
 				</div>				
 				<span id="sp_load" style="display:none;">load...</span>
 
@@ -182,7 +196,7 @@
           </div>        
         </div>
         
-		<div class="ContentLeftA">
+		<div class="ContentLeftA wordlistCommentSection" style="margin-top: 30px; margin-bottom: 0;">
 		  <div class="ContentLeftTitle">
 			  <div class="ContentText WordListTitle">词单评论</div>			  
 		  </div>        
@@ -206,14 +220,6 @@
         </div>
 
 		<div class="ContentLeft1 commentSection">
-          <div class="ContentLeftTitle1">
-              <div class="ContentText"><img src="images/word/word_030.gif"  /></div>
-				  <div class="zao">
-				  	<div id="contentPad">
-						  <span class="formInfo"><a href="ajax.htm?width=375" class="jTip" id="one" name="怎么造句:"></a></span>
-				  	</div>
-				  </div>			  
-          </div>        
           <div class="WordBoxF">
               <div class="zao">
                   <div id="contentPad">
