@@ -66,6 +66,56 @@
             text-decoration: none;
         }
     </style>
+    <style type="text/css">
+        /* 头像改为方形，加灰色外框 */
+        .Boxleft .PersonalWordlist .Autographedphotos {
+            border-radius: 0 !important;
+            width: 90px !important;
+            height: 90px !important;
+            min-width: 90px !important;
+            min-height: 90px !important;
+            padding: 6px !important;
+            border: 1px solid #ccc !important;
+            box-sizing: content-box !important;
+        }
+        .Boxleft .PersonalWordlist .Autographedphotos a,
+        .Boxleft .PersonalWordlist .Autographedphotos a img {
+            border-radius: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
+        /* 头像和昵称居中对齐 */
+        .Boxleft .PersonalWordlist .PersonalWordlistLeft {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            padding-left: 20px !important;
+        }
+        /* 右侧四个方块和此刻心情位置 */
+        .Boxleft .PersonalWordlist .PersonalWordlistRight {
+            padding-left: 17px !important;
+        }
+        /* CreateWordlistB 简介文字截断 */
+        .CreateWordlistB {
+            width: 100%;
+            margin-top: 6px;
+            overflow: visible;
+        }
+
+        .CreateWordlistB .WordListDesc {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            line-height: 24px;
+            font-weight: normal;
+            color: #999999;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+            width: 320px;
+        }
+    </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
@@ -76,7 +126,7 @@
 	<div class="Boxleft">  	
         <div class="PersonalWordlist">
 		    <div class="PersonalWordlistLeft">
-			    <div class="Autographedphotos"><asp:HyperLink ID="img_user" runat="server"></asp:HyperLink></div>
+			    <div class="Autographedphotos" style="border-radius:0!important;width:90px!important;height:90px!important;border:1px solid #ccc!important;padding:6px!important;box-sizing:content-box!important;"><asp:HyperLink ID="img_user" runat="server"></asp:HyperLink></div>
 			    <div class="PersonalWordlistLeftA Name"><asp:Literal ID="lit_name" runat="server"></asp:Literal></div>
 		    </div>		  
 		    <div class="PersonalWordlistRight">
@@ -104,7 +154,7 @@
 				<asp:Literal ID="lit_nullMsg" runat="server" Visible="false">还未添加任何词单。。。</asp:Literal>
                 <asp:Repeater ID="rep_worlist" runat="server" OnItemCommand="rep_worlist_ItemCommand">
                     <ItemTemplate>
-                        <div class="CreateWordlistA1" style="clear:both; height:90px;">
+                        <div class="CreateWordlistA1" style="clear:both; min-height:90px; height:auto;">
                             <div>
                                 <span class="BlackWord"><a href="/wordlist.aspx?w=<%#Eval("wl_id") %>"><%#Eval("name") %></a></span>
                                 <span class="Red"><%#Eval("cnum") %></span>词
@@ -115,7 +165,7 @@
                                     <span class="Word"><asp:LinkButton ID="lnkbtn_del" OnClientClick="return confirm('您确定要删除该词单吗？')" CommandName="wlDel" CommandArgument='<%#Eval("wl_id")%>' runat="server">删除</asp:LinkButton></span>
                                 <%} %>
                             </div>
-	                        <div class="CreateWordlistB"><h1><%#Eval("content") %></h1></div>	          
+	                        <div class="CreateWordlistB"><div class="WordListDesc"><%#Eval("content") %></div></div>	          
 		                </div>
                     </ItemTemplate>
                 </asp:Repeater>             
