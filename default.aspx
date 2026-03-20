@@ -40,7 +40,7 @@
           <div class="ContentLeftTitle1">
               <div class="ContentText section-title">最新词汇</div>
 			  <div class="ContentMore">
-                  <asp:HyperLink ID="hplnk_more7" ImageUrl="/images/index/more.gif" NavigateUrl="/more.aspx" runat="server" Visible="false"></asp:HyperLink>	
+                  <asp:HyperLink ID="hplnk_more7" Text="+更多" NavigateUrl="/more.aspx" runat="server" Visible="false" style="color:#4e8f6c;text-decoration:none;font-size:13px;"></asp:HyperLink>	
 			</div>
           </div>        
           <div style="line-height:35px; width:95%;">

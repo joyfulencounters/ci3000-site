@@ -82,6 +82,29 @@
     flex-direction: column !important;
     align-items: center !important;
 }
+/* 列表视图删除按钮不换行 */
+.CommentsText .CreateWordlistD2 {
+    white-space: nowrap !important;
+    overflow: visible !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    position: relative !important;
+}
+/* 列表视图词条内容与删除按钮布局 */
+.CommentsText .WordListItemContent {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+    padding-right: 30px;
+}
+.CommentsText .WordListDelBtn {
+    color: #999 !important;
+    font-size: 16px !important;
+    margin-left: 5px !important;
+    flex-shrink: 0;
+}
 #pages.yellow A, #pages.yellow SPAN,
 .wordlistPager.yellow A, .wordlistPager.yellow SPAN {
     border: none !important;

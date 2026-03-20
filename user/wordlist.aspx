@@ -5,15 +5,83 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 <script src="/js/sign.js" type="text/javascript"></script>
-<form runat="server" id="form1">
+<style>
+.userWordlistHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0 15px 0;
+}
+.userWordlistTitle {
+    font-size: 16px;
+    font-weight: 500;
+    color: #228a30;
+    line-height: 1.4;
+    padding-left: 8px;
+    border-left: 3px solid #7fcf72;
+}
+/* 排序标签样式 - 文本形式放在右侧 */
+.userWordlistSortBar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+}
+.userWordlistSortItem {
+    font-size: 13px;
+    color: #666;
+    cursor: pointer;
+    padding: 5px 0;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+}
+.userWordlistSortItem:hover {
+    color: #228a30;
+}
+.userWordlistSortItem.active {
+    color: #228a30;
+    border-bottom-color: #7fcf72;
+}
+.userWordlistSortItem img {
+    display: none;
+}
+/* 头像改为方形，加灰色外框 - 与wordlist.aspx一致 */
+.userWordlistPage .PersonalWordlist .Autographedphotos {
+    border-radius: 0 !important;
+    width: 90px !important;
+    height: 90px !important;
+    min-width: 90px !important;
+    min-height: 90px !important;
+    padding: 6px !important;
+    border: 1px solid #ccc !important;
+    box-sizing: content-box !important;
+}
+.userWordlistPage .PersonalWordlist .Autographedphotos a,
+.userWordlistPage .PersonalWordlist .Autographedphotos a img {
+    border-radius: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+/* 头像和昵称居中对齐 */
+.userWordlistPage .PersonalWordlistLeft {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+/* 只移动头像区域，不影响右侧内容 */
+.userWordlistPage .PersonalWordlistLeft .Autographedphotos {
+    margin-left: -15px !important;
+}
+</style>
+<form runat="server" id="form1" class="userWordlistPage">
 <div id="MainBox">
     <!--网站主内容-->
-	<div class="Boxleft">  	
+	<div class="Boxleft">
 		<div class="PersonalWordlist">
 		  <div class="PersonalWordlistLeft">
 			<div class="Autographedphotos"><asp:HyperLink ID="img_user" runat="server"></asp:HyperLink></div>
 			<div class="PersonalWordlistLeftA Name"><asp:Literal ID="lit_name" runat="server"></asp:Literal></div>
-		  </div>		  
+		  </div>
 		  <div class="PersonalWordlistRight">
 		  	<div class="WordlistRightA">
 			<ul>
@@ -23,18 +91,20 @@
 				<li><a href="/user/word.aspx?u=<%=uid %>"><div class="WordlistRightA1"><img src="/images/word/word_27.gif"/></div><div>添加<span class="Red"><asp:Literal ID="lit_x" runat="server">0</asp:Literal></span>词</div></a></li>
 			</ul>
 			</div>
-		  	<div class="WordlistRightB" id="div_sign"><span id="sp_sign" onclick="CkSign(<% if(uc.UserID==uid){%><%= uid%><%} %>)"><asp:Literal ID="lit_feeling" runat="server">懒家伙，什么感言都没有留下...</asp:Literal></span></div>		  
+		  	<div class="WordlistRightB" id="div_sign"><span id="sp_sign" onclick="CkSign(<% if(uc.UserID==uid){%><%= uid%><%} %>)"><asp:Literal ID="lit_feeling" runat="server">懒家伙，什么感言都没有留下...</asp:Literal></span></div>
 		  </div>
-		</div>		
+		</div>
 		<div class="ContentLeft1">
 <div id="con">
-<ul id="tags">
-	<li style="width:185px;" ><img src="/images/word/word_34.gif"/></li>
-  <li class="selectTag" style="margin-left:255px;!important; margin-left:195px;" runat="server" id="AT" ><a onclick="selectTag('ctl00_ContentPlaceHolder1_tagContent0',this)" href="javascript:void(0)"><img src="/images/word/word_35.gif"/> 按创建时间排序</a> </li>
-  <li runat="server" id="RT" ><a onclick="selectTag('ctl00_ContentPlaceHolder1_tagContent1',this)" href="javascript:void(0)"><img src="/images/word/word_35.gif"/> 按最后评论时间排序</a> </li>
-</ul>
+<div class="userWordlistHeader">
+  <div class="userWordlistTitle">所有词单</div>
+  <div class="userWordlistSortBar">
+    <a class="userWordlistSortItem active" href="javascript:void(0)" onclick="switchSortTab(0, this)">按创建时间排序</a>
+    <a class="userWordlistSortItem" href="javascript:void(0)" onclick="switchSortTab(1, this)">按最后评论时间排序</a>
+  </div>
+</div>
 <div id="tagContent">
-<div class="tagContent selectTag" id="tagContent0" runat="server">
+<div class="tagContent" id="tagContent0" style="display:block;">
     <asp:Repeater ID="rep_worlist" runat="server" OnItemCommand="rep_worlist_ItemCommand">
         <ItemTemplate>
             <div class="CommentsBgAllB">
@@ -43,13 +113,13 @@
               <% if (uid == uc.UserID){%><span class="Word"><a href="/Create_word.aspx?w=<%#Eval("wl_id") %>">编辑</a></span> | <span class="Word"><asp:LinkButton ID="lnkbtn_delwl2" OnClientClick="return confirm('您确定要删除该词单吗？')" CommandName="wlDel2" CommandArgument='<%#Eval("wl_id") %>' runat="server">删除</asp:LinkButton></span><%} %></div>
 	          <div class="ViewALLWordA" style="overflow:hidden; "><h1><%#Eval("content") %></h1></div>
 			  <div class="ViewALLWordB"><img src="/images/word/word_25.gif" /><span>评论</span>（<span class="Red"><%#Eval("r_amount") %></span>） <span class="Gray"><%#Eval("lastrmktime").ToString() == "" ? "" : ("最后评论时间" + Eval("lastrmktime"))%></span></div>
-		    </div>			
+		    </div>
 		  </div>
         </ItemTemplate>
-    </asp:Repeater>		  		  		  
-	<div class="yellow"><webdiyer:AspNetPager ID="AspNetPager1" runat="server" FirstPageText="首页" LastPageText="末页" NextPageText="下一页" PrevPageText="上一页" Font-Size="13px" onpagechanging="AspNetPager1_PageChanging"></webdiyer:AspNetPager></div>		  
+    </asp:Repeater>
+	<div class="yellow"><webdiyer:AspNetPager ID="AspNetPager1" runat="server" FirstPageText="首页" LastPageText="末页" NextPageText="下一页" PrevPageText="上一页" Font-Size="13px" onpagechanging="AspNetPager1_PageChanging"></webdiyer:AspNetPager></div>
 	</div>
-<div class="tagContent" id="tagContent1" runat="server" style=""> 
+<div class="tagContent" id="tagContent1" style="display:none;">
 
 <asp:Repeater ID="rep_wordlistR" runat="server" OnItemCommand="rep_worlist_ItemCommand">
     <ItemTemplate>
@@ -59,29 +129,29 @@
           <% if (uid == uc.UserID){%><span class="Word"><a href="/Create_word.aspx?w=<%#Eval("wl_id") %>">编辑</a></span> | <span class="Word"><asp:LinkButton ID="lnkbtn_delwl2" OnClientClick="return confirm('您确定要删除该词单吗？')" CommandName="wlDel2" CommandArgument='<%#Eval("wl_id") %>' runat="server">删除</asp:LinkButton></span><%} %></div>
           <div class="ViewALLWordA"><h1><%#Eval("content") %></h1></div>
 		  <div class="ViewALLWordB"><img src="/images/word/word_25.gif" /><span>评论</span>（<span class="Red"><%#Eval("r_amount") %></span>） <span class="Gray"><%#Eval("lastrmktime").ToString() == "" ? "" : ("最后评论时间" + Eval("lastrmktime"))%></span></div>
-	    </div>			
+	    </div>
 	  </div>
     </ItemTemplate>
-</asp:Repeater>	  
+</asp:Repeater>
 <div class="yellow"><webdiyer:AspNetPager ID="AspNetPager2" runat="server" FirstPageText="首页" LastPageText="末页" NextPageText="下一页" PrevPageText="上一页" Font-Size="13px" onpagechanging="AspNetPager2_PageChanging"></webdiyer:AspNetPager></div>
-</div>	
+</div>
 </div>
 </div>
 
 <script type="text/javascript" language="javascript">
-function selectTag(showContent,selfObj){
+function switchSortTab(tabIndex, selfObj){
 	// 操作标签
-	var tag = document.getElementById("tags").getElementsByTagName("li");
-	var taglength = tag.length;
-	for(i=0; i<taglength; i++){
-		tag[i].className = "";
+	var sortBar = document.querySelector('.userWordlistSortBar');
+	if (sortBar) {
+		var items = sortBar.getElementsByTagName('a');
+		for(i=0; i<items.length; i++){
+			items[i].className = 'userWordlistSortItem';
+		}
+		selfObj.className = 'userWordlistSortItem active';
 	}
-	selfObj.parentNode.className = "selectTag";
 	// 操作内容
-	for(i=0; j=document.getElementById("ctl00_ContentPlaceHolder1_tagContent"+i); i++){
-		j.style.display = "none";
-	}
-	document.getElementById(showContent).style.display = "block";	
+	document.getElementById('tagContent0').style.display = tabIndex == 0 ? 'block' : 'none';
+	document.getElementById('tagContent1').style.display = tabIndex == 1 ? 'block' : 'none';
 }
 </script>
 </div>

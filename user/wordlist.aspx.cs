@@ -94,14 +94,6 @@ public partial class user_wordlist : BasePage
         if (uid <= 0)
             uid = uc.UserID;
         Show_User_WordList_Page(e.NewPageIndex, uid);
-
-        this.AT.Attributes.Remove("class");
-        this.AT.Attributes.Add("class", "selectTag");
-        this.RT.Attributes.Remove("class");
-        tagContent0.Attributes.Remove("style");
-        tagContent0.Attributes.Add("style", "display:block");
-        tagContent1.Attributes.Remove("style");
-        tagContent1.Attributes.Add("style", "display:none");
     }
 
     private void Show_User_WordListR_Page(int pageIndex, int uid)
@@ -123,15 +115,6 @@ public partial class user_wordlist : BasePage
         if (uid <= 0)
             uid = uc.UserID;
         Show_User_WordListR_Page(e.NewPageIndex, uid);
-
-        this.AT.Attributes.Remove("class");
-        this.RT.Attributes.Remove("class");
-        this.RT.Attributes.Add("class", "selectTag");
-
-        tagContent0.Attributes.Remove("style");
-        tagContent0.Attributes.Add("style", "display:none");
-        tagContent1.Attributes.Remove("style");
-        tagContent1.Attributes.Add("style", "display:block");
     }
     #endregion
 
