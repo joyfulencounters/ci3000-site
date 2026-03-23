@@ -68,9 +68,10 @@
     flex-direction: column !important;
     align-items: center !important;
 }
-/* 只移动头像区域，不影响右侧内容 */
-.userWordlistPage .PersonalWordlistLeft .Autographedphotos {
-    margin-left: -15px !important;
+/* 只移动头像和昵称，不影响右侧内容 */
+.userWordlistPage .PersonalWordlistLeft .Autographedphotos,
+.userWordlistPage .PersonalWordlistLeft .Name {
+    margin-left: -20px !important;
 }
 </style>
 <form runat="server" id="form1" class="userWordlistPage">

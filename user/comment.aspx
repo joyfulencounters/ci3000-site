@@ -22,6 +22,36 @@
         }        
     }
 </script>
+<style>
+/* 头像改为方形，加灰色外框 */
+.PersonalWordlist .Autographedphotos {
+    border-radius: 0 !important;
+    width: 90px !important;
+    height: 90px !important;
+    min-width: 90px !important;
+    min-height: 90px !important;
+    padding: 6px !important;
+    border: 1px solid #ccc !important;
+    box-sizing: content-box !important;
+}
+.PersonalWordlist .Autographedphotos a,
+.PersonalWordlist .Autographedphotos a img {
+    border-radius: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+/* 头像和昵称居中对齐 */
+.PersonalWordlistLeft {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+/* 只把头像和昵称往左移动 */
+.PersonalWordlistLeft .Autographedphotos,
+.PersonalWordlistLeft .Name {
+    margin-left: -20px !important;
+}
+</style>
 <form runat="server" id="form1">
 <div id="MainBox">
     <!--网站主内容-->
@@ -46,7 +76,7 @@
 		</div>		  
 		<div class="ContentLeftA">
 				  <div class="ContentLeftTitle" style="border-bottom:#ebebeb 1px solid;">
-					  <div class="ContentText"><span class="ContentText" style=" padding:20px 0px;"><span class="Blue"><asp:Literal ID="lit_nm" runat="server"></asp:Literal></span> <img src="/images/word/word_31.gif" width="126" height="17"/></span></div>					  
+					  <div class="ContentText"><span class="ContentText" style=" padding:20px 0px;"><span class="Blue"><asp:Literal ID="lit_nm" runat="server"></asp:Literal></span> <span class="Blue">的所有评论</span></span></div>					  
 				  </div>				  		  
             <asp:Repeater ID="rep_wwl_remark" runat="server" OnItemCommand="rep_wwl_remark_ItemCommand"
                       onitemdatabound="rep_wwl_remark_ItemDataBound">

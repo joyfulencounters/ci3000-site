@@ -1,10 +1,55 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Template/MasterHead.master" AutoEventWireup="true" CodeFile="word.aspx.cs" Inherits="user_word" Title="无标题页" %>
 <%@ Register Assembly="AspNetPager" Namespace="Wuqi.Webdiyer" TagPrefix="webdiyer" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-    <asp:Literal ID="lit_titleName" runat="server"></asp:Literal>添加的新词<%= WebQywy.Data_Public.GetTitleAppend()%>
+    <asp:Literal ID="lit_titleName" runat="server"></asp:Literal>添加的词<%= WebQywy.Data_Public.GetTitleAppend()%>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 <script src="/js/sign.js" type="text/javascript"></script>
+<style>
+/* 标题样式 - 与collection.aspx保持一致 */
+.WordTitle {
+    font-size: 16px;
+    font-weight: 500;
+    color: #228a30;
+    line-height: 1.4;
+    padding-left: 8px;
+    border-left: 3px solid #7fcf72;
+}
+/* 头像改为方形，加灰色外框 */
+.PersonalWordlist .Autographedphotos {
+    border-radius: 0 !important;
+    width: 90px !important;
+    height: 90px !important;
+    min-width: 90px !important;
+    min-height: 90px !important;
+    padding: 6px !important;
+    border: 1px solid #ccc !important;
+    box-sizing: content-box !important;
+}
+.PersonalWordlist .Autographedphotos a,
+.PersonalWordlist .Autographedphotos a img {
+    border-radius: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+/* 头像和昵称居中对齐 */
+.PersonalWordlistLeft {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+/* 只把头像和昵称往左移动 */
+.PersonalWordlistLeft .Autographedphotos,
+.PersonalWordlistLeft .Name {
+    margin-left: -20px !important;
+}
+/* 词汇列表和分页之间的间距 */
+.CreateWordlistD .yellow {
+    margin-top: 50px !important;
+    display: block !important;
+    clear: both !important;
+}
+</style>
 <form runat="server" id="form1">
 <div id="MainBox">
     <!--网站主内容-->
@@ -28,7 +73,7 @@
         </div>
 	  <div class="ContentLeftA">
 				  <div class="ContentLeftTitle">
-				    <div class="ContentText" style=" padding:20px 0px;"><img src="/images/word/word_41.gif" width="89" height="17"/></div>
+				    <div class="ContentText" style="padding:20px 0px;"><div class="WordTitle">添加的词</div></div>
 				    <div class="ContentMore"></div>
 				  </div>        
 	              <div class="CreateWordlistD">

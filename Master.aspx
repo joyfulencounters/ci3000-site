@@ -11,6 +11,117 @@ function Wsearch() {
     window.location.href = "/search/"+locat+sear;
 }
 </script>
+<style>
+/* 头像改为方形，加灰色外框 */
+.PersonalWordlist .Autographedphotos {
+    border-radius: 0 !important;
+    width: 90px !important;
+    height: 90px !important;
+    min-width: 90px !important;
+    min-height: 90px !important;
+    padding: 6px !important;
+    border: 1px solid #ccc !important;
+    box-sizing: content-box !important;
+}
+.PersonalWordlist .Autographedphotos a,
+.PersonalWordlist .Autographedphotos a img,
+.PersonalWordlist .Autographedphotos img {
+    border-radius: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+/* 头像和昵称居中对齐 */
+.PersonalWordlistLeft {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+/* 只把头像和昵称往左移动 */
+.PersonalWordlistLeft .Autographedphotos,
+.PersonalWordlistLeft .Name {
+    margin-left: -25px !important;
+}
+/* 推荐词单样式修复 */
+.Boxright .List {
+    background: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 15px;
+}
+.Boxright .List .Rank ul {
+    list-style: none !important;
+    padding: 0;
+    margin: 0;
+}
+.Boxright .List .Rank ul li {
+    list-style: none !important;
+}
+.Boxright .List .Rank ul li::before {
+    content: none !important;
+}
+.Boxright .List .Rank li {
+    height: auto !important;
+    min-height: 120px;
+    padding: 15px 0;
+    border-bottom: 1px dashed #e0e0e0;
+    overflow: hidden;
+}
+.Boxright .List .Rank li:last-child {
+    border-bottom: none;
+}
+.Boxright .WordTxt {
+    width: 100%;
+}
+.Boxright .WordTxt1 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+.Boxright .WordTxt1 .Autographedphotos {
+    display: none !important;
+}
+.Boxright .WordTxt1 .Autographedphotos img {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 50% !important;
+    object-fit: cover;
+}
+.Boxright .photosTxt {
+    font-size: 12px;
+    color: #666;
+    line-height: 1.6;
+}
+.Boxright .photosTxt a {
+    text-decoration: none;
+    color: #333;
+}
+.Boxright .photosTxt a:hover {
+    color: #4e8f6c;
+}
+.Boxright .photosTxt h3 {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin: 3px 0;
+    display: inline;
+}
+.Boxright .SeparateWords {
+    width: 100%;
+    margin-top: 8px;
+    font-size: 12px;
+    color: #888;
+    line-height: 1.8;
+}
+.Boxright .SeparateWords a {
+    color: #4e8f6c;
+    text-decoration: none;
+    margin-right: 5px;
+}
+.Boxright .SeparateWords a:hover {
+    text-decoration: underline;
+}
+</style>
 <form runat="server" id="form1">
 <div id="MainBox">
     <!--网站主内容-->
