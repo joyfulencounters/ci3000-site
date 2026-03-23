@@ -9,6 +9,103 @@
     var uid = <%=uc.UserID %>;
 </script>
 <script src="/js/sign.js" type="text/javascript"></script>
+<style>
+/* 收藏标题样式 - 与wordlist.aspx保持一致 */
+.CollectionTitle {
+    font-size: 16px;
+    font-weight: 500;
+    color: #228a30;
+    line-height: 1.4;
+    padding-left: 8px;
+    border-left: 3px solid #7fcf72;
+}
+/* 头像改为方形，加灰色外框 - 与wordlist.aspx保持一致 */
+.PersonalWordlist .Autographedphotos {
+    border-radius: 0 !important;
+    width: 90px !important;
+    height: 90px !important;
+    min-width: 90px !important;
+    min-height: 90px !important;
+    padding: 6px !important;
+    border: 1px solid #ccc !important;
+    box-sizing: content-box !important;
+}
+.PersonalWordlist .Autographedphotos a,
+.PersonalWordlist .Autographedphotos a img {
+    border-radius: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+/* 头像和昵称居中对齐 */
+.PersonalWordlistLeft {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+/* 只把头像和昵称往左移动 */
+.PersonalWordlistLeft .Autographedphotos,
+.PersonalWordlistLeft .Name {
+    margin-left: -20px !important;
+}
+/* 收藏词输入框样式 - 与wordlist.aspx保持一致 */
+.collectionAddSection .MeaningWordE {
+    border-bottom: none !important;
+    margin-left: 0 !important;
+}
+.collectionAddSection .TagSubmitBtn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 32px !important;
+    padding: 0 15px !important;
+}
+.MeaningWordE {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0 14px 0;
+    clear: both;
+}
+.Wordbttse1 {
+    margin-right: 0 !important;
+    display: flex;
+    align-items: center;
+}
+.Wordbttse1 input {
+    width: 250px;
+    height: 28px;
+    padding: 0 10px;
+    border: 1px solid #d7ddd7;
+    border-radius: 14px;
+    box-shadow: none;
+    vertical-align: middle;
+    margin: 0;
+}
+.Wordbttse1 input:focus {
+    border-color: #8db79f;
+    background: #fff;
+}
+.Wordbttse {
+    display: flex;
+    align-items: center;
+}
+.TagSubmitBtn {
+    background: #4e8f6c;
+    color: #fff !important;
+    border: none;
+    border-radius: 14px;
+    padding: 0 20px;
+    height: 28px;
+    line-height: 28px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 13px;
+}
+.TagSubmitBtn:hover {
+    background: #3d7a57 !important;
+    color: #fff !important;
+}
+</style>
 <form runat="server" id="form1">
 <div id="MainBox">
     <!--网站主内容-->
@@ -33,7 +130,7 @@
 		</div>		  
 	  <div class="ContentLeftA">
 				  <div class="ContentLeftTitle">
-				    <div class="ContentText" style=" padding:20px 0px;"><img src="/images/word/words_12.png" class="png24" width="36" height="19"/></div>				    
+				    <div class="ContentText" style="padding:20px 0px;"><div class="CollectionTitle">收藏</div></div>
 				  </div>        
 	              <div class="CreateWordlistD">
 					<ul class="BlackWordList">					
@@ -48,13 +145,13 @@
               <div class="ContentMore">
 				      
 		</div>
-		<div class="CreateWordlistE"></div><div style="margin-top:5px;">
-                        <asp:Panel ID="pane_coll" runat="server" Visible="false">                            
-				        <div class="CreateWordlistG">收藏词：
-				          <input type="text" name="n" value="输入要收藏的词" id="Input_word" onfocus="if(this.value=='输入要收藏的词')this.value='';" onkeyup="Onkeyup('Input_word');" />
-                        </div>
-				        <div class="CreateWordlistF"><a href="javascript:void(0);" onclick="WordCheck()"><img src="/images/word/word_02.gif" border="0" alt="收藏词" /></a>
-				        <span id="sp_Vili" style="color:Red;display:none;">注意：添加的词不能超过8个汉字，中间不可添加空格或其它符号</span></div>
+		<div class="CreateWordlistE"></div><div style="margin-top:5px;" class="collectionAddSection">
+                        <asp:Panel ID="pane_coll" runat="server" Visible="false">
+				        <div class="MeaningWordE">
+				          <div class="Wordbttse1">收藏词：<input name="n" type="text" id="Input_word" onfocus="if(this.value=='输入要收藏的词')this.value='';" onkeyup="Onkeyup('Input_word');" value="输入要收藏的词" size="17" maxlength="8" /></div>
+                          <div class="Wordbttse"><a href="javascript:void(0);" onclick="WordCheck()" class="TagSubmitBtn">添加</a></div>
+				        </div>
+				        <span id="sp_Vili" style="color:#ff17a3;display:none;">注意：添加的词不能超过8个汉字，中间不可添加空格或其它符号</span>
 				        </asp:Panel>
 			          </div>
 			            <span id="sp_load" style="display:none;">load...</span>

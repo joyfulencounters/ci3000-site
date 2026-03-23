@@ -39,6 +39,13 @@
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
 }
+/* 加载图片左上角显示 */
+#ShowList img {
+    display: block !important;
+    width: 200px !important;
+    height: 200px !important;
+    margin: 2px 0 0 5px !important;
+}
 
 /* 评论输入区样式 */
 .commentSection { margin-top: 0 !important; }
