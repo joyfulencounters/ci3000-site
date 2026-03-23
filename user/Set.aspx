@@ -70,11 +70,11 @@ function UserPicChange() {
 }
 </script>
 <form runat="server" id="form1">
-<div class="CreateWord">
+<div class="CreateWord" style="background-color:#fff; background-image:url(../images/word/word_bg_05.gif), linear-gradient(#fff, #fff);">
     <!--<span style="border:1px blue solid; line-height:30px;"><a href="/user/set.aspx">修改密码</a></span>-->
 	<div class="CreateWordA1">
 		<div style="width:99px; float:left;">
-            <div class="Autographedphotos" style="margin-bottom:10px;"><img runat="server" id="User_Img" src="/images/word/img_photo.gif"/></div>
+            <div class="Autographedphotos" style="margin-bottom:10px; border-radius:0; width:80px; height:80px; border:1px solid #ccc; padding:5px; box-sizing:content-box;"><img runat="server" id="User_Img" src="/images/word/img_photo.gif" style="border-radius:0;"/></div>
             <div style="text-align:center;"><a href="/user/face.aspx"><img title="修改头像" src="/images/word/word_67.gif" /></a></div>
             <!--<div><img src="/images/member/member_05.gif" /><a href="javascript:;" onclick="funClick()">修改签名照</a></div>-->
         </div>    

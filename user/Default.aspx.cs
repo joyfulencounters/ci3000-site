@@ -98,13 +98,13 @@ public partial class user_Default : BasePage
     #region 用户收藏列表
     private void Show_Word_Collection_Page(int pageIndex, int uid)
     {
-        int pageSize = 60;
+        int pageSize = 20;
         int rowCount = 0;
         int pageCount = 0;
         DataTable dt = words.Show_Word_Collection_Page(pageIndex, pageSize, uid, out rowCount, out pageCount);
         this.rep_coll.DataSource = dt;
         this.rep_coll.DataBind();
-        if (dt.Rows.Count > 35)
+        if (dt.Rows.Count >= 20)
         {
             hypeLnk_more.Visible = true;
             hypeLnk_more.NavigateUrl = "/user/collection.aspx?u=" + uid;

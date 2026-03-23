@@ -10,7 +10,13 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.IO;
 using WebQywy;
+
+using SDImage = System.Drawing.Image;
 public partial class user_face : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -34,26 +40,83 @@ public partial class user_face : BasePage
     //切图并生成缩略
     protected void btn_Image_Click(object sender, EventArgs e)
     {
-        int imageWidth = Int32.Parse(txt_width.Text);
-        int imageHeight = Int32.Parse(txt_height.Text);
-        int cutTop = Int32.Parse(txt_top.Text);
-        int cutLeft = Int32.Parse(txt_left.Text);
-        int dropWidth = Int32.Parse(txt_DropWidth.Text);
-        int dropHeight = Int32.Parse(txt_DropHeight.Text);
+        try
+        {
+            // 预览图上的尺寸和坐标
+            double previewTop = double.Parse(txt_top.Text);
+            double previewLeft = double.Parse(txt_left.Text);
+            double zoom = double.Parse(txt_Zoom.Text);
+            int previewCutSize = Int32.Parse(txt_DropWidth.Text);  // 前端预览框尺寸 92
 
-        string ImgUrl = ImageIcon.ImageUrl;
-        if (!string.IsNullOrEmpty(ImgUrl))       
-            ImgUrl = ImgUrl.Substring(ImgUrl.LastIndexOf("/") + 1);
-        
-        string savepath = Data_Public.GetConfig("UserPicPath");
-        ImgUrl = savepath + ImgUrl;
-        string filename = new UploadFile().SaveCutPic(Server.MapPath(ImgUrl), Server.MapPath(savepath), 0, 0, dropWidth, dropHeight, cutLeft, cutTop, imageWidth, imageHeight);
-        // 完成切图并保存到数据库 cookie也修改
-        filename = savepath + filename;
-        Users.UserInfo_Update(uc.UserID, filename);
+            // 输出尺寸改为 200x200，更清晰
+            int outputSize = 200;
 
-        this.imgphoto.ImageUrl = filename;
-        Response.Redirect("/user/face.aspx");
+            // 根据缩放比例计算原图上的坐标和尺寸
+            int originCutLeft = (int)Math.Round(previewLeft / zoom);
+            int originCutTop = (int)Math.Round(previewTop / zoom);
+            int originCutSize = (int)Math.Round(previewCutSize / zoom);
+
+            string ImgUrl = ImageIcon.ImageUrl;
+            if (!string.IsNullOrEmpty(ImgUrl))       
+                ImgUrl = ImgUrl.Substring(ImgUrl.LastIndexOf("/") + 1);
+            
+            string savepath = Data_Public.GetConfig("UserPicPath");
+            string sourcePath = Server.MapPath(savepath + ImgUrl);
+            
+            // 生成新文件名（缩短长度以适应数据库字段）
+            string filename = DateTime.Now.ToString("MMddHHmmss") + new Random().Next(100, 999).ToString() + ".png";
+            string destPath = Server.MapPath(savepath + filename);
+
+            // 直接从原图高质量裁切
+            using (SDImage originalImg = SDImage.FromFile(sourcePath))
+            {
+                // 确保裁切区域不超出原图范围
+                originCutLeft = Math.Max(0, Math.Min(originCutLeft, originalImg.Width - 1));
+                originCutTop = Math.Max(0, Math.Min(originCutTop, originalImg.Height - 1));
+                originCutSize = Math.Max(1, Math.Min(originCutSize, Math.Min(originalImg.Width - originCutLeft, originalImg.Height - originCutTop)));
+                
+                // 创建 200x200 的高质量输出图像
+                Bitmap resultImg = new Bitmap(outputSize, outputSize, PixelFormat.Format32bppArgb);
+                using (Graphics g = Graphics.FromImage(resultImg))
+                {
+                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    g.SmoothingMode = SmoothingMode.HighQuality;
+                    g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                    g.CompositingQuality = CompositingQuality.HighQuality;
+                    
+                    // 从原图的指定区域绘制到目标图像
+                    Rectangle destRect = new Rectangle(0, 0, outputSize, outputSize);
+                    Rectangle srcRect = new Rectangle(originCutLeft, originCutTop, originCutSize, originCutSize);
+                    g.DrawImage(originalImg, destRect, srcRect, GraphicsUnit.Pixel);
+                }
+                
+                // 保存为高质量 PNG
+                if (File.Exists(destPath))
+                {
+                    File.SetAttributes(destPath, FileAttributes.Normal);
+                    File.Delete(destPath);
+                }
+                resultImg.Save(destPath, ImageFormat.Png);
+                resultImg.Dispose();
+            }
+
+            // 更新数据库
+            string newUrl = savepath + filename;
+            int result = Users.UserInfo_Update(uc.UserID, newUrl);
+            
+            if (result > 0)
+            {
+                Response.Redirect("/user/face.aspx");
+            }
+            else
+            {
+                Response.Write("<script>alert('更新数据库失败，路径: " + newUrl + "');history.back();</script>");
+            }
+        }
+        catch (Exception ex)
+        {
+            Response.Write("<script>alert('保存失败：" + ex.Message.Replace("'", "\\'").Replace("\"", "\\\"") + "');history.back();</script>");
+        }
     }
     //上传的原始图
     protected void btnUpload_Click(object sender, EventArgs e)
