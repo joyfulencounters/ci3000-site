@@ -42,6 +42,12 @@ public partial class Ajax_AjaxGet : BasePage
                 case "wordlist_del": //删除词单
                     WordList_Del();
                     break;
+                case "random_word": // 小程序随机取词
+                    Random_Word();
+                    break;
+                case "random_wordlist": // 小程序随机词单
+                    Random_WordList();
+                    break;
                 default:
                     Response.Write("False");
                     break;
@@ -201,4 +207,130 @@ public partial class Ajax_AjaxGet : BasePage
     }
     #endregion
     
+#region 小程序随机取词
+private void Random_Word()
+{
+    // 1. 随机取一个词ID
+    int wid = words.Show_WordID_Random();
+
+    // 2. 查词信息
+    DataTable dtWord = words.Show_Info_Word_One(wid);
+
+    // 3. 查tag
+    DataTable dtTag = words.Show_Word_Tags(wid);
+
+    // 4. 查同tag词
+    DataTable dtLike = words.Show_Words_likeTag(wid);
+
+    System.Text.StringBuilder json = new System.Text.StringBuilder();
+
+    json.Append("{");
+
+    // 当前词
+    if (dtWord.Rows.Count > 0)
+    {
+        json.AppendFormat("\"word\":{{\"id\":{0},\"name\":\"{1}\"}},",
+            dtWord.Rows[0]["w_id"],
+            dtWord.Rows[0]["name"].ToString().Replace("\"", "")
+        );
+    }
+    else
+    {
+        json.Append("\"word\":{\"id\":0,\"name\":\"\"},");
+    }
+
+    // tags 数组
+    json.Append("\"tags\":[");
+    for (int i = 0; i < dtTag.Rows.Count; i++)
+    {
+        json.AppendFormat("\"{0}\"", dtTag.Rows[i]["name"].ToString().Replace("\"", ""));
+        if (i != dtTag.Rows.Count - 1)
+            json.Append(",");
+    }
+    json.Append("],");
+
+    // 为兼容旧前端，保留一个主 tag
+    if (dtTag.Rows.Count > 0)
+    {
+        json.AppendFormat("\"tag\":\"{0}\",",
+            dtTag.Rows[0]["name"].ToString().Replace("\"", "")
+        );
+    }
+    else
+    {
+        json.Append("\"tag\":\"\",");
+    }
+
+    // 相关词
+    json.Append("\"related\":[");
+    for (int i = 0; i < dtLike.Rows.Count; i++)
+    {
+        json.AppendFormat("{{\"id\":{0},\"name\":\"{1}\"}}",
+            dtLike.Rows[i]["w_id"],
+            dtLike.Rows[i]["name"].ToString().Replace("\"", "")
+        );
+
+        if (i != dtLike.Rows.Count - 1)
+            json.Append(",");
+    }
+    json.Append("]");
+
+    json.Append("}");
+
+    Response.Write(json.ToString());
 }
+#endregion
+
+#region 小程序随机词单
+private void Random_WordList()
+{
+    DataTable dtWordList = words.Show_WordList_Random();
+    System.Text.StringBuilder json = new System.Text.StringBuilder();
+
+    json.Append("{");
+
+    if (dtWordList != null && dtWordList.Rows.Count > 0)
+    {
+        int wlid = Convert.ToInt32(dtWordList.Rows[0]["wl_id"]);
+        string wlname = dtWordList.Rows[0]["name"].ToString().Replace("\"", "");
+        string wlcontent = dtWordList.Rows[0]["content"].ToString().Replace("\"", "");
+
+        DataTable dtWords = words.Show_WordList_Words_All(wlid);
+
+        json.AppendFormat("\"wordlist\":{{\"id\":{0},\"name\":\"{1}\",\"content\":\"{2}\",\"count\":{3}}},",
+    wlid,
+    wlname,
+    wlcontent,
+    dtWords.Rows.Count
+);
+        json.Append("\"words\":[");
+
+        int max = dtWords.Rows.Count > 24 ? 24 : dtWords.Rows.Count;
+
+        for (int i = 0; i < max; i++)
+        {
+            json.AppendFormat(
+                "{{\"id\":{0},\"name\":\"{1}\"}}",
+                dtWords.Rows[i]["w_id"],
+                dtWords.Rows[i]["name"].ToString().Replace("\"", "")
+            );
+
+            if (i != max - 1)
+                json.Append(",");
+        }
+
+        json.Append("]");
+    }
+    else
+    {
+        json.Append("\"wordlist\":{\"id\":0,\"name\":\"\"},\"words\":[]");
+    }
+
+    json.Append("}");
+
+    Response.Write(json.ToString());
+}
+#endregion
+
+}
+

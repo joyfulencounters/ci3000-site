@@ -871,5 +871,50 @@ namespace WebQywy
             return admin.Show_adm_keenness2_Page(1, 50, out rowCount, out pageCount);
         }
         #endregion
+
+    #region 随机词单（词数 6~50）
+public static DataTable Show_WordList_Random()
+{
+    string sql = @"
+    SELECT TOP 1 wl.*
+    FROM Aml_wordList wl
+    INNER JOIN (
+        SELECT wl_id, COUNT(*) AS wordCount
+        FROM Aml_wordlistC
+        GROUP BY wl_id
+    ) c ON wl.wl_id = c.wl_id
+    WHERE c.wordCount >= 6 AND c.wordCount <= 50
+    ORDER BY NEWID()
+    ";
+
+    DataSet ds = DataBusiness.RunReturnDataSet(CommandType.Text, sql);
+    return ds.Tables[0];
+}
+#endregion
+
+#region 词单里的所有词
+public static DataTable Show_WordList_Words_All(int wlid)
+{
+    string sql = @"
+    SELECT aw.*
+    FROM Aml_wordlistC wc
+    INNER JOIN Aml_word aw ON wc.w_id = aw.w_id
+    WHERE wc.wl_id = @wlid
+    ";
+
+    SqlParameter[] pars = {
+        new SqlParameter("@wlid", SqlDbType.Int)
+    };
+    pars[0].Value = wlid;
+
+    DataSet ds = DataBusiness.RunReturnDataSet(CommandType.Text, sql, pars);
+    return ds.Tables[0];
+}
+#endregion
+
     }
+
+
+
+
 }
