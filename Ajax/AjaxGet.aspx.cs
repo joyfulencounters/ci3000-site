@@ -293,7 +293,11 @@ private void Random_WordList()
     {
         int wlid = Convert.ToInt32(dtWordList.Rows[0]["wl_id"]);
         string wlname = dtWordList.Rows[0]["name"].ToString().Replace("\"", "");
-        string wlcontent = dtWordList.Rows[0]["content"].ToString().Replace("\"", "");
+       string wlcontent = dtWordList.Rows[0]["content"] == DBNull.Value 
+    ? "" 
+    : dtWordList.Rows[0]["content"].ToString().Replace("\"", "").Trim();
+
+wlcontent = wlcontent == "请简单说明这个词单的主题" ? "" : wlcontent;
 
         DataTable dtWords = words.Show_WordList_Words_All(wlid);
 
