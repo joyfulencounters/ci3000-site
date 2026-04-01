@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using WebQywy;
+using System.Text;
 public partial class Ajax_AjaxGet : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -47,6 +48,12 @@ public partial class Ajax_AjaxGet : BasePage
                     break;
                 case "random_wordlist": // 小程序随机词单
                     Random_WordList();
+                    break;
+                case "getwordsbytag": // 小程序按感觉(tag)查词
+                    GetWordsByTag();
+                    break;
+                case "getwordbyid":
+                    GetWordById();
                     break;
                 default:
                     Response.Write("False");
@@ -231,7 +238,7 @@ private void Random_Word()
     {
         json.AppendFormat("\"word\":{{\"id\":{0},\"name\":\"{1}\"}},",
             dtWord.Rows[0]["w_id"],
-            dtWord.Rows[0]["name"].ToString().Replace("\"", "")
+            JsonSafe(dtWord.Rows[0]["name"].ToString())
         );
     }
     else
@@ -243,7 +250,7 @@ private void Random_Word()
     json.Append("\"tags\":[");
     for (int i = 0; i < dtTag.Rows.Count; i++)
     {
-        json.AppendFormat("\"{0}\"", dtTag.Rows[i]["name"].ToString().Replace("\"", ""));
+        json.AppendFormat("\"{0}\"", JsonSafe(dtTag.Rows[i]["name"].ToString()));
         if (i != dtTag.Rows.Count - 1)
             json.Append(",");
     }
@@ -253,7 +260,7 @@ private void Random_Word()
     if (dtTag.Rows.Count > 0)
     {
         json.AppendFormat("\"tag\":\"{0}\",",
-            dtTag.Rows[0]["name"].ToString().Replace("\"", "")
+            JsonSafe(dtTag.Rows[0]["name"].ToString())
         );
     }
     else
@@ -267,7 +274,7 @@ private void Random_Word()
     {
         json.AppendFormat("{{\"id\":{0},\"name\":\"{1}\"}}",
             dtLike.Rows[i]["w_id"],
-            dtLike.Rows[i]["name"].ToString().Replace("\"", "")
+            JsonSafe(dtLike.Rows[i]["name"].ToString())
         );
 
         if (i != dtLike.Rows.Count - 1)
@@ -292,10 +299,10 @@ private void Random_WordList()
     if (dtWordList != null && dtWordList.Rows.Count > 0)
     {
         int wlid = Convert.ToInt32(dtWordList.Rows[0]["wl_id"]);
-        string wlname = dtWordList.Rows[0]["name"].ToString().Replace("\"", "");
-       string wlcontent = dtWordList.Rows[0]["content"] == DBNull.Value 
-    ? "" 
-    : dtWordList.Rows[0]["content"].ToString().Replace("\"", "").Trim();
+        string wlname = JsonSafe(dtWordList.Rows[0]["name"].ToString());
+string wlcontent = dtWordList.Rows[0]["content"] == DBNull.Value
+    ? ""
+    : JsonSafe(dtWordList.Rows[0]["content"].ToString().Trim());
 
 wlcontent = wlcontent == "请简单说明这个词单的主题" ? "" : wlcontent;
 
@@ -314,10 +321,10 @@ wlcontent = wlcontent == "请简单说明这个词单的主题" ? "" : wlcontent
         for (int i = 0; i < max; i++)
         {
             json.AppendFormat(
-                "{{\"id\":{0},\"name\":\"{1}\"}}",
-                dtWords.Rows[i]["w_id"],
-                dtWords.Rows[i]["name"].ToString().Replace("\"", "")
-            );
+    "{{\"id\":{0},\"name\":\"{1}\"}}",
+    dtWords.Rows[i]["w_id"],
+    JsonSafe(dtWords.Rows[i]["name"].ToString())
+);
 
             if (i != max - 1)
                 json.Append(",");
@@ -335,6 +342,164 @@ wlcontent = wlcontent == "请简单说明这个词单的主题" ? "" : wlcontent
     Response.Write(json.ToString());
 }
 #endregion
+
+#region 小程序按感觉(tag)查词
+private void GetWordsByTag()
+{
+    string tag = Data_Public.getQueryStringToStr("tag").Trim();
+    int page = Data_Public.getQueryStringToInt("page");
+    int pageSize = Data_Public.getQueryStringToInt("pagesize");
+
+    if (page <= 0) page = 1;
+    if (pageSize <= 0) pageSize = 37;
+    if (pageSize > 60) pageSize = 60;
+
+    System.Text.StringBuilder json = new System.Text.StringBuilder();
+
+    if (string.IsNullOrEmpty(tag))
+    {
+        json.Append("{");
+        json.Append("\"status\":0,");
+        json.Append("\"msg\":\"tag不能为空\",");
+        json.Append("\"tag\":\"\",");
+        json.Append("\"rowCount\":0,");
+        json.Append("\"pageCount\":0,");
+        json.Append("\"list\":[]");
+        json.Append("}");
+
+        Response.Write(json.ToString());
+        return;
+    }
+
+    int rowCount = 0;
+    int pageCount = 0;
+    DataTable dt = search.Search_word_OfTag_Page(page, pageSize, tag, out rowCount, out pageCount);
+
+    json.Append("{");
+    json.Append("\"status\":1,");
+    json.Append("\"msg\":\"success\",");
+    json.AppendFormat("\"tag\":\"{0}\",", JsonSafe(tag));
+    json.AppendFormat("\"rowCount\":{0},", rowCount);
+    json.AppendFormat("\"pageCount\":{0},", pageCount);
+    json.Append("\"list\":[");
+
+    if (dt != null && dt.Rows.Count > 0)
+    {
+        for (int i = 0; i < dt.Rows.Count; i++)
+        {
+            if (i > 0) json.Append(",");
+
+            string wid = dt.Rows[i]["w_id"].ToString();
+            string name = dt.Rows[i]["name"].ToString();
+            string content = dt.Rows[i]["content"] == DBNull.Value ? "" : dt.Rows[i]["content"].ToString();
+
+            json.Append("{");
+            json.AppendFormat("\"id\":{0},", string.IsNullOrEmpty(wid) ? "0" : wid);
+            json.AppendFormat("\"name\":\"{0}\",", JsonSafe(name));
+            json.AppendFormat("\"content\":\"{0}\"", JsonSafe(content));
+            json.Append("}");
+        }
+    }
+
+    json.Append("]");
+    json.Append("}");
+
+    Response.Write(json.ToString());
+}
+#endregion
+
+private string JsonSafe(string text)
+{
+    if (string.IsNullOrEmpty(text))
+        return "";
+
+    return text.Replace("\\", "\\\\")
+               .Replace("\"", "\\\"")
+               .Replace("\r", "")
+               .Replace("\n", " ");
+}
+
+#region 小程序按ID取词
+private void GetWordById()
+{
+    int wid = Data_Public.getQueryStringToInt("id");
+
+    System.Text.StringBuilder json = new System.Text.StringBuilder();
+    json.Append("{");
+
+    if (wid <= 0)
+    {
+        json.Append("\"status\":0,");
+        json.Append("\"msg\":\"id不能为空\",");
+        json.Append("\"word\":{\"id\":0,\"name\":\"\"},");
+        json.Append("\"tags\":[],");
+        json.Append("\"tag\":\"\",");
+        json.Append("\"related\":[]");
+        json.Append("}");
+
+        Response.Write(json.ToString());
+        return;
+    }
+
+    DataTable dtWord = words.Show_Info_Word_One(wid);
+    DataTable dtTag = words.Show_Word_Tags(wid);
+    DataTable dtLike = words.Show_Words_likeTag(wid);
+
+    json.Append("\"status\":1,");
+    json.Append("\"msg\":\"success\",");
+
+    if (dtWord != null && dtWord.Rows.Count > 0)
+    {
+        json.AppendFormat("\"word\":{{\"id\":{0},\"name\":\"{1}\"}},",
+            dtWord.Rows[0]["w_id"],
+            JsonSafe(dtWord.Rows[0]["name"].ToString())
+        );
+    }
+    else
+    {
+        json.Append("\"word\":{\"id\":0,\"name\":\"\"},");
+    }
+
+    json.Append("\"tags\":[");
+    if (dtTag != null && dtTag.Rows.Count > 0)
+    {
+        for (int i = 0; i < dtTag.Rows.Count; i++)
+        {
+            if (i > 0) json.Append(",");
+            json.AppendFormat("\"{0}\"", JsonSafe(dtTag.Rows[i]["name"].ToString()));
+        }
+    }
+    json.Append("],");
+
+    if (dtTag != null && dtTag.Rows.Count > 0)
+    {
+        json.AppendFormat("\"tag\":\"{0}\",", JsonSafe(dtTag.Rows[0]["name"].ToString()));
+    }
+    else
+    {
+        json.Append("\"tag\":\"\",");
+    }
+
+    json.Append("\"related\":[");
+    if (dtLike != null && dtLike.Rows.Count > 0)
+    {
+        for (int i = 0; i < dtLike.Rows.Count; i++)
+        {
+            if (i > 0) json.Append(",");
+            json.AppendFormat("{{\"id\":{0},\"name\":\"{1}\"}}",
+                dtLike.Rows[i]["w_id"],
+                JsonSafe(dtLike.Rows[i]["name"].ToString())
+            );
+        }
+    }
+    json.Append("]");
+
+    json.Append("}");
+
+    Response.Write(json.ToString());
+}
+#endregion
+
 
 }
 
