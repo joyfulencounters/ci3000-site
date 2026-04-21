@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Data;
+using System.Data.SqlClient; 
 using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using WebQywy;
+using WebQywyBusiness;
 using System.Text;
 public partial class Ajax_AjaxGet : BasePage
 {
@@ -46,6 +48,12 @@ public partial class Ajax_AjaxGet : BasePage
                 case "random_word": // 小程序随机取词
                     Random_Word();
                     break;
+                case "wx_login": //公众号登录                    
+                    Wx_Login();
+                    break;
+                case "add_tag": //小程序加tag
+                    Add_Tag();
+                    break;
                 case "random_wordlist": // 小程序随机词单
                     Random_WordList();
                     break;
@@ -54,6 +62,12 @@ public partial class Ajax_AjaxGet : BasePage
                     break;
                 case "getwordbyid":
                     GetWordById();
+                    break;
+                    case "getwordlistbyid":
+                    GetWordListById();
+                    break;
+                case "get_wordlists_by_word":
+                    GetWordListsByWord();
                     break;
                 default:
                     Response.Write("False");
@@ -497,6 +511,237 @@ private void GetWordById()
     json.Append("}");
 
     Response.Write(json.ToString());
+}
+#endregion
+
+private void GetWordListsByWord()
+{
+    int wid = Data_Public.getQueryStringToInt("id");
+
+    StringBuilder json = new StringBuilder();
+    json.Append("{");
+
+    if (wid <= 0)
+    {
+        json.Append("\"list\":[]}");
+        Response.Write(json.ToString());
+        return;
+    }
+
+    DataTable dt = words.Show_Word_OfWordList(wid);
+
+    json.Append("\"list\":[");
+
+    if (dt != null && dt.Rows.Count > 0)
+    {
+        for (int i = 0; i < dt.Rows.Count; i++)
+        {
+            if (i > 0) json.Append(",");
+
+            json.AppendFormat(
+                "{{\"id\":{0},\"name\":\"{1}\"}}",
+                dt.Rows[i]["wl_id"],
+                JsonSafe(dt.Rows[i]["name"].ToString())
+            );
+        }
+    }
+
+    json.Append("]}");
+
+    Response.Write(json.ToString());
+}
+
+
+#region 小程序按ID取词单
+private void GetWordListById()
+{
+    int wlid = Data_Public.getQueryStringToInt("id");
+    System.Text.StringBuilder json = new System.Text.StringBuilder();
+
+    json.Append("{");
+
+    if (wlid <= 0)
+    {
+        json.Append("\"status\":0,");
+        json.Append("\"msg\":\"id不能为空\",");
+        json.Append("\"wordlist\":{\"id\":0,\"name\":\"\",\"content\":\"\",\"count\":0},");
+        json.Append("\"words\":[]");
+        json.Append("}");
+
+        Response.Write(json.ToString());
+        return;
+    }
+
+    DataTable dtWordList = words.Show_Info_WordList_One(wlid);
+
+    if (dtWordList == null || dtWordList.Rows.Count == 0)
+    {
+        json.Append("\"status\":0,");
+        json.Append("\"msg\":\"未找到该词单\",");
+        json.Append("\"wordlist\":{\"id\":0,\"name\":\"\",\"content\":\"\",\"count\":0},");
+        json.Append("\"words\":[]");
+        json.Append("}");
+
+        Response.Write(json.ToString());
+        return;
+    }
+
+    string wlname = JsonSafe(dtWordList.Rows[0]["name"].ToString());
+    string wlcontent = dtWordList.Rows[0]["content"] == DBNull.Value
+        ? ""
+        : JsonSafe(dtWordList.Rows[0]["content"].ToString().Trim());
+
+    wlcontent = wlcontent == "请简单说明这个词单的主题" ? "" : wlcontent;
+
+    DataTable dtWords = words.Show_WordList_Words_All(wlid);
+
+    int wordCount = dtWords == null ? 0 : dtWords.Rows.Count;
+
+    json.Append("\"status\":1,");
+    json.Append("\"msg\":\"success\",");
+    json.AppendFormat(
+        "\"wordlist\":{{\"id\":{0},\"name\":\"{1}\",\"content\":\"{2}\",\"count\":{3}}},",
+        wlid,
+        wlname,
+        wlcontent,
+        wordCount
+    );
+
+    json.Append("\"words\":[");
+
+    if (dtWords != null && dtWords.Rows.Count > 0)
+    {
+        int max = dtWords.Rows.Count > 24 ? 24 : dtWords.Rows.Count;
+
+        for (int i = 0; i < max; i++)
+        {
+            if (i > 0) json.Append(",");
+
+            json.AppendFormat(
+                "{{\"id\":{0},\"name\":\"{1}\"}}",
+                dtWords.Rows[i]["w_id"],
+                JsonSafe(dtWords.Rows[i]["name"].ToString())
+            );
+        }
+    }
+
+    json.Append("]");
+    json.Append("}");
+
+    Response.Write(json.ToString());
+}
+#endregion
+
+
+#region 小程序微信登录（简化版）
+private void Wx_Login()
+{
+    string openid = Request["openid"];
+
+    System.Text.StringBuilder json = new System.Text.StringBuilder();
+
+    if (string.IsNullOrEmpty(openid))
+    {
+        Response.Write("{\"success\":false}");
+        return;
+    }
+
+    string sql = "SELECT userid FROM Aml_User_Wechat WHERE openid=@openid";
+
+    SqlParameter[] pars = {
+        new SqlParameter("@openid", SqlDbType.VarChar,100)
+    };
+    pars[0].Value = openid;
+
+    DataSet ds = DataBusiness.RunReturnDataSet(CommandType.Text, sql, pars);
+
+    int userid = 0;
+
+    if (ds.Tables[0].Rows.Count > 0)
+    {
+        userid = Convert.ToInt32(ds.Tables[0].Rows[0]["userid"]);
+    }
+    else
+    {
+        string randomName = "wx用户" + DateTime.Now.Ticks.ToString().Substring(10);
+
+        string insertUserSql = @"
+        INSERT INTO aml_users(email,password,realname,LoginTimes,createDate,lastDate)
+        VALUES(@email,'',@name,0,GETDATE(),GETDATE());
+        SELECT @@IDENTITY;
+        ";
+
+        SqlParameter[] pars2 = {
+            new SqlParameter("@email", SqlDbType.VarChar,50),
+            new SqlParameter("@name", SqlDbType.VarChar,50)
+        };
+
+        pars2[0].Value = openid + "@wx.com";
+        pars2[1].Value = randomName;
+
+        object obj = DataBusiness.RunReturnScalar(CommandType.Text, insertUserSql, pars2);
+
+        userid = Convert.ToInt32(obj);
+
+        string bindSql = "INSERT INTO Aml_User_Wechat(userid,openid) VALUES(@uid,@openid)";
+
+        SqlParameter[] pars3 = {
+            new SqlParameter("@uid", SqlDbType.Int),
+            new SqlParameter("@openid", SqlDbType.VarChar,100)
+        };
+
+        pars3[0].Value = userid;
+        pars3[1].Value = openid;
+
+        DataBusiness.RunReturnInt(CommandType.Text, bindSql, pars3);
+    }
+
+    json.Append("{\"success\":true,\"userid\":" + userid + "}");
+
+    Response.Write(json.ToString());
+}
+#endregion
+
+#region 添加共鸣签
+private void Add_Tag()
+{
+    string wid = Request["wid"];
+    string tag = Request["tag"];
+    string userid = Request["userid"];
+
+    if (string.IsNullOrEmpty(wid) || string.IsNullOrEmpty(tag) || string.IsNullOrEmpty(userid))
+    {
+        Response.Write("{\"success\":false}");
+        return;
+    }
+
+    // 简单清洗
+    tag = tag.Trim().Replace("\"", "");
+
+    if (tag.Length < 2 || tag.Length > 8)
+    {
+        Response.Write("{\"success\":false,\"msg\":\"长度需2-8字\"}");
+        return;
+    }
+
+    string sql = @"
+    INSERT INTO Aml_wordtag(name,addtime,userid,w_id)
+    VALUES(@name,GETDATE(),@userid,@wid)
+    ";
+
+    SqlParameter[] pars = {
+        new SqlParameter("@name", SqlDbType.VarChar,50),
+        new SqlParameter("@userid", SqlDbType.Int),
+        new SqlParameter("@wid", SqlDbType.Int)
+    };
+
+    pars[0].Value = tag;
+    pars[1].Value = Convert.ToInt32(userid);
+    pars[2].Value = Convert.ToInt32(wid);
+
+    DataBusiness.RunReturnInt(CommandType.Text, sql, pars);
+
+    Response.Write("{\"success\":true}");
 }
 #endregion
 
