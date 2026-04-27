@@ -2127,3 +2127,46 @@ DIV.yellow SPAN.disabled {
     background-image: none !important;
 }
 
+.MiniAppCard {
+    margin: 14px 0 18px;
+    padding: 16px 14px 14px;
+    background: #f8f6f1;
+    border: 1px solid #e6dfd4;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.miniapp-card-title {
+    font-size: 15px;
+    color: #458062;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.miniapp-card-subtitle {
+    margin-top: 5px;
+    font-size: 12px;
+    color: #9a8f80;
+}
+
+.miniapp-qrcode-wrap {
+    width: 128px;
+    height: 128px;
+    margin: 12px auto 8px;
+    padding: 8px;
+    background: #fff;
+    border: 1px solid #eee8df;
+    box-shadow: 0 2px 8px rgba(80, 60, 40, 0.06);
+}
+
+.miniapp-qrcode-wrap img {
+    width: 128px;
+    height: 128px;
+    display: block;
+}
+
+.miniapp-card-desc {
+    font-size: 12px;
+    color: #777;
+    line-height: 18px;
+}

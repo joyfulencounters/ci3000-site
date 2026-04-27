@@ -160,6 +160,20 @@
    
       </div>
     </div>
+
+<div class="MiniAppCard">
+    <div class="miniapp-card-title">千言万语小程序</div>
+    <div class="miniapp-card-subtitle">把喜欢的词，留在掌心</div>
+
+    <div class="miniapp-qrcode-wrap">
+        <img src="/images/miniapp_qrcode.png" alt="千言万语小程序二维码" />
+    </div>
+
+    <div class="miniapp-card-desc">
+        微信扫码·随时共鸣
+    </div>
+</div>
+
 </div>
 </form>
 </asp:Content>

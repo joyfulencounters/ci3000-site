@@ -97,7 +97,7 @@ public partial class _Default : BasePage
     {
         try
         {
-            DataTable dt = words.Show_WWl_Remark_Index(5);
+            DataTable dt = words.Show_WWl_Remark_Index(10);
             rep_remark_say.DataSource = dt;
             rep_remark_say.DataBind();
         }

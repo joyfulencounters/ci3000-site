@@ -8,6 +8,7 @@ using System.Web.Security;
 using System.Web.UI;
 using WebQywy;
 using WebQywyBusiness;
+using System.Collections.Generic;
 using System.Text;
 public partial class Ajax_AjaxGet : BasePage
 {
@@ -54,6 +55,18 @@ public partial class Ajax_AjaxGet : BasePage
                 case "add_tag": //小程序加tag
                     Add_Tag();
                     break;
+                case "get_word_comments":
+                    Get_Word_Comments();
+                    break;
+                case "add_word_comment":
+                    Add_Word_Comment();
+                    break;
+                case "get_wordlist_comments":
+                    Get_WordList_Comments();
+                    break;
+                case "add_wordlist_comment":
+                    Add_WordList_Comment();
+                    break;    
                 case "random_wordlist": // 小程序随机词单
                     Random_WordList();
                     break;
@@ -636,17 +649,77 @@ private void GetWordListById()
 #region 小程序微信登录（简化版）
 private void Wx_Login()
 {
-    string openid = Request["openid"];
-
+    string code = Request["code"];
     System.Text.StringBuilder json = new System.Text.StringBuilder();
 
-    if (string.IsNullOrEmpty(openid))
+    if (string.IsNullOrEmpty(code))
     {
-        Response.Write("{\"success\":false}");
+        Response.Write("{\"success\":false,\"msg\":\"code为空\"}");
         return;
     }
 
-    string sql = "SELECT userid FROM Aml_User_Wechat WHERE openid=@openid";
+    string appid = "wxb2cc272cc83de34c";
+    string secret = "806f808fd155ca9fdcf124c0301dfd08";
+
+    string url = "https://api.weixin.qq.com/sns/jscode2session?appid=" + appid
+        + "&secret=" + secret
+        + "&js_code=" + code
+        + "&grant_type=authorization_code";
+
+    string wxResult = "";
+
+    try
+    {
+        System.Net.WebRequest request = System.Net.WebRequest.Create(url);
+        request.Method = "GET";
+
+        using (System.Net.WebResponse response = request.GetResponse())
+        {
+            using (System.IO.Stream stream = response.GetResponseStream())
+            {
+                using (System.IO.StreamReader reader = new System.IO.StreamReader(stream, System.Text.Encoding.UTF8))
+                {
+                    wxResult = reader.ReadToEnd();
+                }
+            }
+        }
+    }
+    catch (Exception ex)
+    {
+        Response.Write("{\"success\":false,\"msg\":\"请求微信接口失败：" + ex.Message.Replace("\"", "'") + "\"}");
+        return;
+    }
+
+    if (string.IsNullOrEmpty(wxResult))
+    {
+        Response.Write("{\"success\":false,\"msg\":\"微信返回为空\"}");
+        return;
+    }
+
+    string openid = "";
+    try
+    {
+        System.Web.Script.Serialization.JavaScriptSerializer js = new System.Web.Script.Serialization.JavaScriptSerializer();
+        var dic = js.Deserialize<Dictionary<string, object>>(wxResult);
+
+        if (dic.ContainsKey("openid"))
+        {
+            openid = dic["openid"].ToString();
+        }
+        else
+        {
+            string errMsg = wxResult.Replace("\"", "'");
+            Response.Write("{\"success\":false,\"msg\":\"微信登录失败\",\"wx\":\"" + errMsg + "\"}");
+            return;
+        }
+    }
+    catch (Exception ex)
+    {
+        Response.Write("{\"success\":false,\"msg\":\"解析微信返回失败：" + ex.Message.Replace("\"", "'") + "\"}");
+        return;
+    }
+
+    string sql = "SELECT Userid FROM aml_users WHERE openid=@openid";
 
     SqlParameter[] pars = {
         new SqlParameter("@openid", SqlDbType.VarChar,100)
@@ -659,45 +732,33 @@ private void Wx_Login()
 
     if (ds.Tables[0].Rows.Count > 0)
     {
-        userid = Convert.ToInt32(ds.Tables[0].Rows[0]["userid"]);
+        userid = Convert.ToInt32(ds.Tables[0].Rows[0]["Userid"]);
     }
     else
     {
         string randomName = "wx用户" + DateTime.Now.Ticks.ToString().Substring(10);
 
         string insertUserSql = @"
-        INSERT INTO aml_users(email,password,realname,LoginTimes,createDate,lastDate)
-        VALUES(@email,'',@name,0,GETDATE(),GETDATE());
+        INSERT INTO aml_users(email,password,realname,avater,openid,LoginTimes,createDate,lastDate)
+        VALUES(@email,'',@name,'/images/avatar/wx.png',@openid,0,GETDATE(),GETDATE());
         SELECT @@IDENTITY;
         ";
 
         SqlParameter[] pars2 = {
             new SqlParameter("@email", SqlDbType.VarChar,50),
-            new SqlParameter("@name", SqlDbType.VarChar,50)
+            new SqlParameter("@name", SqlDbType.VarChar,50),
+            new SqlParameter("@openid", SqlDbType.VarChar,100)
         };
 
         pars2[0].Value = openid + "@wx.com";
         pars2[1].Value = randomName;
+        pars2[2].Value = openid;
 
         object obj = DataBusiness.RunReturnScalar(CommandType.Text, insertUserSql, pars2);
-
         userid = Convert.ToInt32(obj);
-
-        string bindSql = "INSERT INTO Aml_User_Wechat(userid,openid) VALUES(@uid,@openid)";
-
-        SqlParameter[] pars3 = {
-            new SqlParameter("@uid", SqlDbType.Int),
-            new SqlParameter("@openid", SqlDbType.VarChar,100)
-        };
-
-        pars3[0].Value = userid;
-        pars3[1].Value = openid;
-
-        DataBusiness.RunReturnInt(CommandType.Text, bindSql, pars3);
     }
 
-    json.Append("{\"success\":true,\"userid\":" + userid + "}");
-
+    json.Append("{\"success\":true,\"openid\":\"" + openid + "\",\"userid\":" + userid + "}");
     Response.Write(json.ToString());
 }
 #endregion
@@ -738,6 +799,198 @@ private void Add_Tag()
     pars[0].Value = tag;
     pars[1].Value = Convert.ToInt32(userid);
     pars[2].Value = Convert.ToInt32(wid);
+
+    DataBusiness.RunReturnInt(CommandType.Text, sql, pars);
+
+    Response.Write("{\"success\":true}");
+}
+#endregion
+
+#region 获取词评论
+private void Get_Word_Comments()
+{
+    string wid = Request["wid"];
+
+    if (string.IsNullOrEmpty(wid))
+    {
+        Response.Write("{\"success\":false,\"list\":[]}");
+        return;
+    }
+
+    string sql = @"
+    SELECT TOP 30 rw_id, content, addtime, userid
+    FROM aml_remarkw
+    WHERE w_id=@wid
+    ORDER BY rw_id DESC
+    ";
+
+    SqlParameter[] pars = {
+        new SqlParameter("@wid", SqlDbType.Int)
+    };
+    pars[0].Value = Convert.ToInt32(wid);
+
+    DataSet ds = DataBusiness.RunReturnDataSet(CommandType.Text, sql, pars);
+
+    System.Text.StringBuilder json = new System.Text.StringBuilder();
+    json.Append("{\"success\":true,\"list\":[");
+
+    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+    {
+        DataRow dr = ds.Tables[0].Rows[i];
+
+        if (i > 0) json.Append(",");
+
+        string content = JsonSafe(dr["content"].ToString());
+        string addtime = JsonSafe(dr["addtime"].ToString());
+        string userid = dr["userid"].ToString();
+
+        json.Append("{");
+        json.Append("\"id\":" + dr["rw_id"].ToString() + ",");
+        json.Append("\"content\":\"" + content + "\",");
+        json.Append("\"addtime\":\"" + addtime + "\",");
+        json.Append("\"userid\":" + userid + ",");
+        json.Append("\"nickname\":\"" + JsonSafe("用户" + userid) + "\"");
+        json.Append("}");
+    }
+
+    json.Append("]}");
+    Response.Write(json.ToString());
+}
+#endregion
+
+
+#region 发表词评论
+private void Add_Word_Comment()
+{
+    string wid = Request["wid"];
+    string content = Request["content"];
+    string userid = Request["userid"];
+
+    if (string.IsNullOrEmpty(wid) || string.IsNullOrEmpty(content) || string.IsNullOrEmpty(userid))
+    {
+        Response.Write("{\"success\":false,\"msg\":\"参数不完整\"}");
+        return;
+    }
+
+    content = content.Trim().Replace("\"", "");
+
+    if (content.Length < 2 || content.Length > 100)
+    {
+        Response.Write("{\"success\":false,\"msg\":\"评论长度需2-100字\"}");
+        return;
+    }
+
+    string sql = @"
+    INSERT INTO aml_remarkw(content,addtime,userid,r_type,w_id)
+    VALUES(@content,GETDATE(),@userid,0,@wid)
+    ";
+
+    SqlParameter[] pars = {
+        new SqlParameter("@content", SqlDbType.VarChar,500),
+        new SqlParameter("@userid", SqlDbType.Int),
+        new SqlParameter("@wid", SqlDbType.Int)
+    };
+
+    pars[0].Value = content;
+    pars[1].Value = Convert.ToInt32(userid);
+    pars[2].Value = Convert.ToInt32(wid);
+
+    DataBusiness.RunReturnInt(CommandType.Text, sql, pars);
+
+    Response.Write("{\"success\":true}");
+}
+#endregion
+
+
+#region 获取词单评论
+private void Get_WordList_Comments()
+{
+    string wlid = Request["wlid"];
+
+    if (string.IsNullOrEmpty(wlid))
+    {
+        Response.Write("{\"success\":false,\"list\":[]}");
+        return;
+    }
+
+    string sql = @"
+    SELECT TOP 30 rwl_id, content, addtime, user_id
+    FROM aml_remarkwl
+    WHERE wl_id=@wlid
+    ORDER BY rwl_id DESC
+    ";
+
+    SqlParameter[] pars = {
+        new SqlParameter("@wlid", SqlDbType.Int)
+    };
+    pars[0].Value = Convert.ToInt32(wlid);
+
+    DataSet ds = DataBusiness.RunReturnDataSet(CommandType.Text, sql, pars);
+
+    System.Text.StringBuilder json = new System.Text.StringBuilder();
+    json.Append("{\"success\":true,\"list\":[");
+
+    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+    {
+        DataRow dr = ds.Tables[0].Rows[i];
+
+        if (i > 0) json.Append(",");
+
+        string content = JsonSafe(dr["content"].ToString());
+        string addtime = JsonSafe(dr["addtime"].ToString());
+        string userid = dr["user_id"].ToString();
+
+        json.Append("{");
+        json.Append("\"id\":" + dr["rwl_id"].ToString() + ",");
+        json.Append("\"content\":\"" + content + "\",");
+        json.Append("\"addtime\":\"" + addtime + "\",");
+        json.Append("\"userid\":" + userid + ",");
+        json.Append("\"nickname\":\"" + JsonSafe("用户" + userid) + "\"");
+        json.Append("}");
+    }
+
+    json.Append("]}");
+    Response.Write(json.ToString());
+}
+#endregion
+
+
+
+#region 发表词单评论
+private void Add_WordList_Comment()
+{
+    string wlid = Request["wlid"];
+    string content = Request["content"];
+    string userid = Request["userid"];
+
+    if (string.IsNullOrEmpty(wlid) || string.IsNullOrEmpty(content) || string.IsNullOrEmpty(userid))
+    {
+        Response.Write("{\"success\":false,\"msg\":\"参数不完整\"}");
+        return;
+    }
+
+    content = content.Trim().Replace("\"", "");
+
+    if (content.Length < 2 || content.Length > 100)
+    {
+        Response.Write("{\"success\":false,\"msg\":\"评论长度需2-100字\"}");
+        return;
+    }
+
+    string sql = @"
+    INSERT INTO aml_remarkwl(content,addtime,user_id,wl_id)
+    VALUES(@content,GETDATE(),@userid,@wlid)
+    ";
+
+    SqlParameter[] pars = {
+        new SqlParameter("@content", SqlDbType.VarChar,500),
+        new SqlParameter("@userid", SqlDbType.Int),
+        new SqlParameter("@wlid", SqlDbType.Int)
+    };
+
+    pars[0].Value = content;
+    pars[1].Value = Convert.ToInt32(userid);
+    pars[2].Value = Convert.ToInt32(wlid);
 
     DataBusiness.RunReturnInt(CommandType.Text, sql, pars);
 
